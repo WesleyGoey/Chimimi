@@ -1,18 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReviewController;
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/products', function () {
-    return view('products');
-});
+Route::get('/products', [ProductController::class, 'index']);
 
-Route::get('/reviews', function () {
-    return view('reviews');
-});
+Route::get('/reviews', [ReviewController::class, 'index']);
 
 Route::get('/cart', function () {
     return view('cart');

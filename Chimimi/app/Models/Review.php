@@ -12,8 +12,14 @@ class Review extends Model
 
     protected $fillable = [
         'profile_id',
-        'product_id',
         'rating',
         'comment',
     ];
+
+    public function reviewerProfile(){
+        return $this->belongsTo(Profile::class);
+    }
+    public static function latestTenReviews(){
+        return self::with('reviewerProfile')->latest()->take(10)->get();
+    }
 }

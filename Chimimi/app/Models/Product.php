@@ -18,4 +18,12 @@ class Product extends Model
         'price_ready_to_eat',
         'image_path'
     ];
+    public static function bestSellers()
+    {
+        return self::whereIn('id', [1, 2, 6])->get(['image_path', 'name']);
+    }
+    public static function allProducts()
+    {
+        return self::all();
+    }
 }
