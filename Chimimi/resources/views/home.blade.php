@@ -37,9 +37,9 @@
                             bite and create memorable experiences for our customers. Discover the taste that makes us
                             special!<br><br>
                             Established with a love for culinary excellence, Chimimi strives to innovate traditional recipes
-                            while maintaining authentic flavors. We believe that every risoles should be a delightful
-                            experience, from the crispy exterior to the rich, savory filling. Our team is committed to
-                            quality, ensuring that each product is made fresh daily and delivered with care.<br><br>
+                            while keeping authentic flavors. Every risoles should be a delightful
+                            experience, from the crispy exterior to the rich filling—savory or sweet. Our team is committed to
+                            quality, ensuring each product is made fresh daily and delivered with care.<br><br>
                         </p>
                     </div>
                 </div>
