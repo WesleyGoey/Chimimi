@@ -22,7 +22,8 @@ class Profile extends Model
         return $this->hasMany(Order::class);
     }
 
-    public static function getFirstPerson(){
+    public static function getFirstPerson()
+    {
         return self::first();
     }
 }

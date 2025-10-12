@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Review>
  */
+
 use App\Models\Profile;
+
 class ReviewFactory extends Factory
 {
     /**

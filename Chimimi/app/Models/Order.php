@@ -27,10 +27,10 @@ class Order extends Model
     }
 
     public function getFirstPersonOrder()
-	{
-		$orders = Order::where('profile_id', 1)->with('products')->get();
-		return view('orders.index', [
-			'orders' => $orders
-		]);
-	}
+    {
+        $orders = Order::where('profile_id', 1)->with('products')->get();
+        return view('orders.index', [
+            'orders' => $orders
+        ]);
+    }
 }
