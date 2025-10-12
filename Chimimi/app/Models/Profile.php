@@ -16,4 +16,13 @@ class Profile extends Model
         'password',
         'phone',
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public static function getFirstPerson(){
+        return self::first();
+    }
 }

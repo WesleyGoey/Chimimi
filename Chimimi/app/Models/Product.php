@@ -15,9 +15,18 @@ class Product extends Model
         'category',
         'ingredients',
         'price_frozen',
-        'price_ready_to_eat',
+        'price_cooked',
         'image_path'
     ];
+    public function orders()
+    {
+        return $this->belongsToMany(
+            \App\Models\Order::class,
+            'order_products',
+            'product_id',
+            'order_id'
+        )->withPivot('product_type', 'price_at_order', 'quantity');
+    }
     public static function bestSellers()
     {
         return self::whereIn('id', [1, 2, 6])->get(['image_path', 'name']);

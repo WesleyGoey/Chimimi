@@ -7,7 +7,8 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use App\Models\Profile;
 use App\Models\Review;
-use App\Models\Cart;
+use App\Models\Order;
+use App\Models\OrderProduct;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,8 +24,11 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Profile::factory(100)->create();
-        Review::factory(100)->create();
-        Cart::factory(100)->create();
+        $this->call([
+            ProductSeeder::class,   
+            ProfileSeeder::class,  
+            OrderSeeder::class,
+            ReviewSeeder::class
+        ]);
     }
 }

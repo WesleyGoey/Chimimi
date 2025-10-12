@@ -27,19 +27,16 @@
                                 <div class="mt-auto mb-3">
                                     <span class="badge bg-warning text-dark me-2"
                                         style="font-size:1rem;border-radius:16px;">Frozen:
-                                        {{ number_format($product->price_frozen, 0, ',', '.') }}K</span>
-                                    <span class="badge bg-danger" style="font-size:1rem;border-radius:16px;">Ready:
-                                        {{ number_format($product->price_ready_to_eat, 0, ',', '.') }}K</span>
+                                        {{ $product->price_frozen / 1000 }}K</span>
+                                    <span class="badge bg-danger" style="font-size:1rem;border-radius:16px;">Cooked:
+                                        {{ $product->price_cooked / 1000 }}K</span>
                                 </div>
-                                {{-- <form method="POST" action="{{ route('cart.add', $product->id) }}"> --}}
-                                @csrf
                                 <div class="d-flex justify-content-center">
                                     <button type="submit" class="btn btn-lg px-4 py-2 w-50"
                                         style="background:#ff6f61;color:#fff;font-weight:600;border-radius:24px;box-shadow:0 2px 12px rgba(255,111,97,0.10);transition:background .2s;">
                                         <i class="bi bi-cart-plus me-2"></i> Add to Cart
                                     </button>
                                 </div>
-                                {{-- </form> --}}
                             </div>
                         </div>
                     </div>

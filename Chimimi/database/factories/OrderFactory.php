@@ -5,10 +5,10 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Review>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Order>
  */
 use App\Models\Profile;
-class ReviewFactory extends Factory
+class OrderFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,8 +19,9 @@ class ReviewFactory extends Factory
     {
         return [
             'profile_id' => Profile::inRandomOrder()->first()->id,
-            'rating' => $this->faker->numberBetween(1, 5),
-            'comment' => $this->faker->sentence(),
+            'amount' => 0,
+            'isPaid' => false,
+            'notes' => $this->faker->sentence()
         ];
     }
 }
