@@ -5,11 +5,12 @@
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/products.css') }}">
 
-    <section
-        style="background: linear-gradient(135deg, #ffe066 0%, #ff6f61 100%); padding: 4rem 0; min-height:100vh;">
+    <section style="background: linear-gradient(135deg, #ffe066 0%, #ff6f61 100%); padding: 4rem 0; min-height:100vh;">
         <div class="container">
             <div class="d-flex justify-content-center mb-5">
-                <span class="fw-bold" style="color:#fff;background:#ff6f61;padding:0.6em 2em;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.7rem;letter-spacing:1px;">Our Menu</span>
+                <span class="fw-bold"
+                    style="color:#fff;background:#ff6f61;padding:0.6em 2em;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.7rem;letter-spacing:1px;">Our
+                    Menu</span>
             </div>
             <div class="row justify-content-center">
                 @foreach ($products as $product)

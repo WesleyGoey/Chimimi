@@ -17,7 +17,8 @@
         </div>
     </div>
 
-    <section style="background: linear-gradient(135deg, #ffe066 0%, #ff6f61 100%); padding: 5rem 0; border-top: 2.5px solid #ff6f61;">
+    <section
+        style="background: linear-gradient(135deg, #ffe066 0%, #ff6f61 100%); padding: 5rem 0; border-top: 2.5px solid #ff6f61;">
         <div class="container">
             <div class="row justify-content-center align-items-center mb-5">
                 <div class="col-lg-5 mb-4 mb-lg-0 d-flex justify-content-center align-items-center">
@@ -43,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="w-100 my-5 d-flex justify-content-center"></div>
 
             <div class="row justify-content-center">
@@ -73,7 +74,8 @@
                         </div>
                         <div class="d-flex justify-content-center mt-4">
                             <a href="/products" class="btn btn-lg btn-warning px-5 py-3"
-                                style="font-weight:600;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);">View All
+                                style="font-weight:600;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);">View
+                                All
                                 Details</a>
                         </div>
                     </div>
