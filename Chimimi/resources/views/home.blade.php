@@ -76,7 +76,7 @@
                             <a href="/products" class="btn btn-lg btn-warning px-5 py-3"
                                 style="font-weight:600;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);">View
                                 All
-                                Details</a>
+                                Menu</a>
                         </div>
                     </div>
                 </div>

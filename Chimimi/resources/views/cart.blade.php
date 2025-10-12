@@ -12,8 +12,8 @@
                 </span>
             </div>
             <div class="row justify-content-center">
-                <div class="col-md-7">
-                    <div class="card shadow-lg p-4"
+                <div class="col-12 col-md-7">
+                    <div class="card shadow-lg p-3 p-md-4"
                         style="background:#fffbe6;border-radius:24px; border: 2.5px solid #ff6f61;">
                         @php
                             $profile = \App\Models\Profile::with('orders.products')->find(1);
@@ -23,33 +23,33 @@
                             <div class="mb-4 pt-4">
                                 @if (isset($order->products) && count($order->products))
                                     @foreach ($order->products as $product)
-                                        <div class="d-flex align-items-center mb-3 p-3"
+                                        <div class="d-flex flex-wrap align-items-center mb-3 p-2 p-md-3"
                                             style="background:#fff;border-radius:18px;box-shadow:0 2px 8px rgba(255,111,97,0.07);">
                                             <img src="{{ $product->image_path ?? 'https://via.placeholder.com/80x80?text=Product' }}"
                                                 alt="{{ $product->name }}"
-                                                style="width:80px;height:80px;object-fit:cover;border-radius:16px;border:2px solid #ffe066;">
-                                            <div class="ms-3 flex-grow-1">
-                                                <div class="fw-bold" style="color:#ff6f61;font-size:1.2rem;">
+                                                style="width:70px;height:70px;object-fit:cover;border-radius:16px;border:2px solid #ffe066;">
+                                            <div class="ms-2 ms-md-3 flex-grow-1" style="min-width:120px;">
+                                                <div class="fw-bold" style="color:#ff6f61;font-size:1.1rem;">
                                                     {{ $product->name }}</div>
-                                                <div class="text-muted" style="font-size:0.95rem;">
+                                                <div class="text-muted" style="font-size:0.92rem;">
                                                     {{ $product->pivot->product_type }} - Rp.
                                                     {{ number_format($product->pivot->price_at_order, 0, ',', '.') }}</div>
                                             </div>
-                                            <div class="d-flex align-items-center gap-2">
+                                            <div class="d-flex align-items-center gap-2 mt-2 mt-md-0">
                                                 <span
                                                     class="btn btn-light p-2 d-flex align-items-center justify-content-center"
-                                                    style="border-radius:50%;width:40px;height:40px;"><i
+                                                    style="border-radius:50%;width:36px;height:36px;"><i
                                                         class="bi bi-dash"></i></span>
                                                 <span class="fw-bold"
-                                                    style="color:#f17807;min-width:32px;text-align:center;">{{ $product->pivot->quantity ?? 1 }}</span>
+                                                    style="color:#f17807;min-width:28px;text-align:center;">{{ $product->pivot->quantity ?? 1 }}</span>
                                                 <span
                                                     class="btn btn-light p-2 d-flex align-items-center justify-content-center"
-                                                    style="border-radius:50%;width:40px;height:40px;"><i
+                                                    style="border-radius:50%;width:36px;height:36px;"><i
                                                         class="bi bi-plus"></i></span>
                                             </div>
                                             <span
-                                                class="btn btn-outline-danger ms-3 p-2 d-flex align-items-center justify-content-center"
-                                                style="border-radius:50%;width:40px;height:40px;"><i
+                                                class="btn btn-outline-danger ms-2 ms-md-3 p-2 d-flex align-items-center justify-content-center"
+                                                style="border-radius:50%;width:36px;height:36px;"><i
                                                     class="bi bi-trash"></i></span>
                                         </div>
                                     @endforeach
