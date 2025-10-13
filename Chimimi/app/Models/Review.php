@@ -18,7 +18,7 @@ class Review extends Model
 
     public function reviewerProfile()
     {
-        return $this->belongsTo(Profile::class);
+        return $this->belongsTo(Profile::class, 'profile_id');
     }
     public static function latestTenReviews()
     {

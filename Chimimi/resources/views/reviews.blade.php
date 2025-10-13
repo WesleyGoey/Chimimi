@@ -74,7 +74,7 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-center mb-2">
                                             <span class="fw-bold me-2" style="color:#ff6f61;">
-                                                {{ $review->profile->username ?? 'Anonymous' }}
+                                                {{ $review->reviewerProfile->username }}
                                             </span>
                                             <span style="font-size:1.25rem;">
                                                 @for ($star = 1; $star <= 5; $star++)
