@@ -62,8 +62,7 @@
 
             <div class="d-flex justify-content-center mb-4">
                 <span class="fw-bold"
-                    style="color:#ff6f61;background:#fffbe6;padding:0.5em 2em;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.25rem;letter-spacing:1px;">Latest
-                    Reviews</span>
+                    style="color:#ff6f61;background:#fffbe6;padding:0.5em 2em;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.25rem;letter-spacing:1px;">Your Reviews</span>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-10">
@@ -74,7 +73,7 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-center mb-2">
                                             <span class="fw-bold me-2" style="color:#ff6f61;">
-                                                {{ $review->reviewerProfile->username }}
+                                                {{ $review->profile->username }}
                                             </span>
                                             <span style="font-size:1.25rem;">
                                                 @for ($star = 1; $star <= 5; $star++)

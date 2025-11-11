@@ -9,7 +9,7 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        $profile = Profile::find(1);
+        $profile = Profile::getFirstPerson();
         $order = $profile ? $profile->orders()->with('products')->first() : null;
         return view('profile', compact('profile', 'order'));
     }

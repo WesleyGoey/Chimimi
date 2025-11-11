@@ -13,6 +13,6 @@ Route::get('/products', [ProductController::class, 'index']);
 
 Route::get('/reviews', [ReviewController::class, 'index']);
 
-Route::get('/cart', [OrderController::class, 'index']);
+Route::get('/cart', [OrderController::class, 'cart']);
 
 Route::get('/profile', [ProfileController::class, 'index']);

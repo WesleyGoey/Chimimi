@@ -26,11 +26,18 @@ class Order extends Model
         )->withPivot('product_type', 'price_at_order', 'quantity');
     }
 
-    public function getFirstPersonOrder()
+    public function profile()
     {
-        $orders = Order::where('profile_id', 1)->with('products')->get();
-        return view('orders.index', [
-            'orders' => $orders
-        ]);
+        return $this->belongsTo(Profile::class, 'profile_id');
     }
+
+    // public function getFirstPersonOrder()
+    // {
+    //     $orders = Order::where('profile_id', 1)->with('products')->get();
+    //     return view('orders.index', [
+    //         'orders' => $orders
+    //     ]);
+    // }
+
+
 }

@@ -16,12 +16,14 @@ class Review extends Model
         'comment',
     ];
 
-    public function reviewerProfile()
+    public function profile()
     {
         return $this->belongsTo(Profile::class, 'profile_id');
     }
+
+    
     public static function latestTenReviews()
     {
-        return self::with('reviewerProfile')->latest()->take(10)->get();
+        return self::with('profile')->latest()->take(10)->get();
     }
 }
