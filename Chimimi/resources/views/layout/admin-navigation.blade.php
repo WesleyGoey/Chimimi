@@ -32,7 +32,7 @@
             style="height:70px;position:absolute;top:0;right:0;z-index:2;margin-right:32px;">
             <ul class="navbar-nav flex-row" style="gap:1.5rem;">
                 <li class="nav-item">
-                    <a class="fs-4" href="/profiles" title="Profiles" style="color:#ff6f61;">
+                    <a class="fs-4" href="/user" title="Profiles" style="color:#ff6f61;">
                        <span
                             style="background:#fff;border-radius:50%;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
                             <i class="bi bi-person-circle"></i>
