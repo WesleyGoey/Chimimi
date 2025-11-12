@@ -12,7 +12,8 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/products', [ProductController::class, 'index']);
 
 Route::get('/reviews', [ReviewController::class, 'index']);
+Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
-Route::get('/cart', [OrderController::class, 'cart']);
+Route::get('/cart', [OrderController::class, 'cart'])->name('cart');
 
 Route::get('/profile', [ProfileController::class, 'index']);

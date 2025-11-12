@@ -23,6 +23,6 @@ class OrderController extends Controller
         // Ambil order yang belum dibayar (cart)
         $order = $profile->orders()->where('isPaid', false)->with('products')->latest()->first();
 
-        return view('cart', compact('profile', 'order'));
+        return view('cart', compact('order'));
     }
 }
