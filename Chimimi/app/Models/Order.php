@@ -11,7 +11,7 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'profile_id',
+        'user_id',
         'amount',
         'isPaid',
         'notes'
@@ -26,9 +26,9 @@ class Order extends Model
         )->withPivot('product_type', 'price_at_order', 'quantity');
     }
 
-    public function profile()
+    public function user()
     {
-        return $this->belongsTo(Profile::class, 'profile_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     // public function getFirstPersonOrder()

@@ -20,22 +20,22 @@
                                 style="background:#fff;border-radius:50%;width:120px;height:120px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 16px rgba(255,111,97,0.12);margin-bottom:1.2rem;">
                                 <i class="bi bi-person-circle" style="color:#ff6f61;font-size:4.5rem;"></i>
                             </span>
-                            <h2 class="fw-bold mb-1" style="color:#ff6f61;">{{ $profile->username ?? 'Username' }}</h2>
+                            <h2 class="fw-bold mb-1" style="color:#ff6f61;">{{ $user->username ?? 'Username' }}</h2>
                         </div>
                         <div class="mb-4 px-4 py-4"
                             style="background:#fff;border-radius:20px;box-shadow:0 2px 12px rgba(255,111,97,0.09);">
                             <div class="row mb-3 align-items-center">
                                 <div class="col-4 text-end fw-bold" style="color:#f17807;">Email</div>
-                                <div class="col-8" style="color:#ff6f61;word-break:break-all;">{{ $profile->email ?? '-' }}
+                                <div class="col-8" style="color:#ff6f61;word-break:break-all;">{{ $user->email ?? '-' }}
                                 </div>
                             </div>
                             <div class="row mb-3 align-items-center">
                                 <div class="col-4 text-end fw-bold" style="color:#f17807;">Phone</div>
-                                <div class="col-8" style="color:#ff6f61;">{{ $profile->phone ?? '-' }}</div>
+                                <div class="col-8" style="color:#ff6f61;">{{ $user->phone ?? '-' }}</div>
                             </div>
                             <div class="row align-items-center">
                                 <div class="col-4 text-end fw-bold" style="color:#f17807;">Password</div>
-                                <div class="col-8" style="color:#ff6f61;">{{ $profile->password ?? '-' }}</div>
+                                <div class="col-8" style="color:#ff6f61;">{{ $user->password ?? '-' }}</div>
                             </div>
                         </div>
                         <div class="d-flex flex-column gap-3 mt-2">

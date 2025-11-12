@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Order>
@@ -20,7 +21,7 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'profile_id' => Profile::inRandomOrder()->first()->id,
+            'user_id' => User::inRandomOrder()->first()->id,
             'amount' => 0,
             'isPaid' => false,
             'notes' => $this->faker->sentence()
