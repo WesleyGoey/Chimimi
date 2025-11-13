@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = User::getFirstPerson();
+        $user = auth()->user(); // Mendapatkan user yang sedang login
         $order = $user->orders()->with('products')->first();
         $reviews = $user->reviews()->latest()->get();
         return view('user', compact('user', 'order', 'reviews'));

@@ -35,25 +35,35 @@
         <div class="d-flex align-items-center justify-content-end"
             style="height:70px;position:absolute;top:0;right:0;z-index:2;margin-right:32px;">
             <ul class="navbar-nav flex-row" style="gap:1.5rem;">
-                <li class="nav-item">
-                    <a class="fs-4" href="{{ route('cart') }}" title="Cart" style="color:#ff6f61;">
-                        <span
-                            style="background:#fff;border-radius:50%;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
-                            <i class="bi bi-cart"></i>
-                        </span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="fs-4" href="/user" title="Profile" style="color:#ff6f61;">
-                        <span
-                            style="background:#fff;border-radius:50%;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
-                            <i class="bi bi-person-circle"></i>
-                        </span>
-                    </a>
-                </li>
+                @auth
+                    <li class="nav-item">
+                        <a class="fs-4" href="/cart" title="Cart" style="color:#ff6f61;">
+                            <span
+                                style="background:#fff;border-radius:50%;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                                <i class="bi bi-cart"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="fs-4" href="/user" title="Profile" style="color:#ff6f61;">
+                            <span
+                                style="background:#fff;border-radius:50%;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                                <i class="bi bi-person-circle"></i>
+                            </span>
+                        </a>
+                    </li>
+                @endauth
+                @guest
+                    <li class="nav-item">
+                        <a class="btn fw-bold px-4 py-2"
+                           href="{{ route('login') }}"
+                           style="background:#fffbe6;color:#ff6f61;border-radius:28px;box-shadow:0 2px 12px rgba(255,111,97,0.13);font-weight:700;transition:background .2s;">
+                            Login
+                        </a>
+                    </li>
+                @endguest
             </ul>
         </div>
-    </div>
     </div>
     <div style="height:12px;background:#ff6f61;border-radius:0 0 8px 8px;"></div>
 </nav>
