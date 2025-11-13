@@ -12,10 +12,10 @@
             </div>
             <div class="row justify-content-center mb-5">
                 <div class="col-md-7">
-                    <form action="{{ route('reviews.store') }}" method="POST">
-                        @csrf
-                        <div class="card shadow-lg p-4"
-                            style="background:#fffbe6;border-radius:24px; border: 2.5px solid #ff6f61;">
+                    <div class="card shadow-lg p-4"
+                        style="background:#fffbe6;border-radius:24px; border: 2.5px solid #ff6f61;">
+                        <form method="POST" action="/reviews">
+                            @csrf
                             <div class="mb-3">
                                 <label class="form-label fw-bold" style="color:#ff6f61;">Rating</label>
                                 <div id="star-rating" class="d-flex gap-2 justify-content-center"
@@ -27,82 +27,82 @@
                                     @endfor
                                 </div>
                                 <input type="hidden" name="rating" id="rating" required>
+                                @error('rating')
+                                    <div class="text-danger mt-1">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    const stars = document.querySelectorAll('#star-rating .star');
-                                    const ratingInput = document.getElementById('rating');
-                                    stars.forEach(star => {
-                                        star.addEventListener('click', function() {
-                                            const val = this.getAttribute('data-value');
-                                            ratingInput.value = val;
-                                            stars.forEach((s, idx) => {
-                                                if (idx < val) {
-                                                    s.innerHTML =
-                                                        '<i class="bi bi-star-fill" style="color:#ffe066;"></i>';
-                                                } else {
-                                                    s.innerHTML =
-                                                        '<i class="bi bi-star" style="color:#ffe066;"></i>';
-                                                }
-                                            });
-                                        });
-                                    });
-                                });
-                            </script>
                             <div class="mb-3">
                                 <label for="comment" class="form-label fw-bold" style="color:#ff6f61;">Your Review</label>
                                 <textarea class="form-control" id="comment" name="comment" rows="3" maxlength="255" required
                                     style="border-radius:16px;"></textarea>
+                                @error('comment')
+                                    <div class="text-danger mt-1">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="d-flex justify-content-center">
                                 <button type="submit" class="btn px-5 py-2"
                                     style="background:#ff6f61;color:#fff;font-weight:600;border-radius:24px;box-shadow:0 2px 12px rgba(255,111,97,0.10);">Submit</button>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const stars = document.querySelectorAll('#star-rating .star');
+                                const ratingInput = document.getElementById('rating');
+                                stars.forEach(star => {
+                                    star.addEventListener('click', function() {
+                                        const val = this.getAttribute('data-value');
+                                        ratingInput.value = val;
+                                        stars.forEach((s, idx) => {
+                                            if (idx < val) {
+                                                s.querySelector('i').classList.remove('bi-star');
+                                                s.querySelector('i').classList.add('bi-star-fill');
+                                                s.querySelector('i').style.color = '#f17807';
+                                            } else {
+                                                s.querySelector('i').classList.add('bi-star');
+                                                s.querySelector('i').classList.remove('bi-star-fill');
+                                                s.querySelector('i').style.color = '#ffe066';
+                                            }
+                                        });
+                                    });
+                                });
+                            });
+                        </script>
+                    </div>
                 </div>
             </div>
 
             <div class="d-flex justify-content-center mb-4">
                 <span class="fw-bold"
-                    style="color:#ff6f61;background:#fffbe6;padding:0.5em 2em;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.25rem;letter-spacing:1px;">Your
+                    style="color:#ff6f61;background:#fffbe6;padding:0.5em 2em;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.25rem;letter-spacing:1px;">Latest
                     Reviews</span>
             </div>
             <div class="row justify-content-center">
-                <div class="col-lg-10 mx-auto">
-                    @foreach ($reviews as $review)
-                        <div class="d-flex justify-content-center mb-4">
-                            <div class="card shadow-sm w-100"
-                                style="max-width:750px;background:#fffbe6;border-radius:18px;border:2px solid #fffbe6;">
-                                <div class="card-body">
-                                    <div class="position-absolute top-50 end-0 translate-middle-y me-3">
-                                        <div class="d-flex align-items-center" style="gap:8px;">
-                                            <span class="btn btn-outline-warning p-2 d-flex align-items-center justify-content-center"
-                                                  style="border-radius:50%;width:36px;height:36px;">
-                                                <i class="bi bi-pencil-square"></i>
+                <div class="col-lg-10">
+                    <div class="row">
+                        @foreach ($reviews as $review)
+                            <div class="col-md-6 mb-4">
+                                <div class="card h-100 shadow-sm border-0" style="background:#fff;border-radius:18px;">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="fw-bold me-2" style="color:#ff6f61;">
+                                                {{ $review->user->username ?? 'Anonymous' }}
                                             </span>
-                                            <span class="btn btn-outline-danger p-2 d-flex align-items-center justify-content-center"
-                                                  style="border-radius:50%;width:36px;height:36px;">
-                                                <i class="bi bi-trash"></i>
+                                            <span>
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $review->rating)
+                                                        <i class="bi bi-star-fill" style="color:#f17807;"></i>
+                                                    @else
+                                                        <i class="bi bi-star" style="color:#ffe066;"></i>
+                                                    @endif
+                                                @endfor
                                             </span>
                                         </div>
+                                        <div style="color:#f17807;font-size:1.05rem;">{{ $review->comment }}</div>
                                     </div>
-                                    <div class="d-flex align-items-center mb-2 justify-content-between">
-                                        <span style="font-size:1.25rem;">
-                                            @for ($star = 1; $star <= 5; $star++)
-                                                @if ($star <= $review->rating)
-                                                    <i class="bi bi-star-fill" style="color:#ffe066;"></i>
-                                                @else
-                                                    <i class="bi bi-star" style="color:#ffe066;"></i>
-                                                @endif
-                                            @endfor
-                                        </span>
-                                    </div>
-                                    <div style="color:#f17807;font-size:1.05rem;">{{ $review->comment }}</div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>

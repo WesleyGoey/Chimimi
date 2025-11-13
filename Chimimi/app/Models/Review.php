@@ -20,9 +20,4 @@ class Review extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    
-    public static function latestTenReviews()
-    {
-        return self::with('user')->latest()->take(10)->get();
-    }
 }

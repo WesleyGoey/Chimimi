@@ -10,8 +10,7 @@ class ReviewController extends Controller
 {
     public function index()
     {
-        $user = User::getFirstPerson();
-        $reviews = $user->reviews()->latest()->get();
+        $reviews = Review::with('user')->latest()->get();
         return view('reviews', compact('reviews'));
     }
 }
