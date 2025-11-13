@@ -56,14 +56,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public static function getFirstPerson()
-    {
-        return self::first();
-    }
 }

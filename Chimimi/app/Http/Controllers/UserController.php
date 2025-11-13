@@ -9,7 +9,12 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = auth()->user(); // Mendapatkan user yang sedang login
+        $user = auth()->user();
+    
+        if (!$user) {
+            return redirect()->route('login');
+        }
+        
         $order = $user->orders()->with('products')->first();
         $reviews = $user->reviews()->latest()->get();
         return view('user', compact('user', 'order', 'reviews'));

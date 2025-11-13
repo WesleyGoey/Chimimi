@@ -21,6 +21,6 @@ Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
 
 Route::middleware('auth')->group(function () {
     Route::get('/cart', [OrderController::class, 'cart'])->name('cart');
-    Route::get('/user', [UserController::class, 'index'])->name('user');
+    Route::get('/user', [UserController::class, 'index'])->name('user'); // Sudah ada middleware
     Route::post('/cart/add', [OrderController::class, 'addToCart'])->name('cart.add');
 });

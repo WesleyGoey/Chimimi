@@ -15,14 +15,13 @@ class OrderController extends Controller
         return view('orders.index', compact('orders'));
     }
 
-    // Perbaikan: ambil cart milik profile yang login
     public function cart()
     {
-        // Ambil user dari auth (langsung, karena User adalah profile)
-        $user = User::getFirstPerson();
-        // Ambil order yang belum dibayar (cart)
+        $user = auth()->user();
+        if (!$user) {
+            return redirect()->route('login');
+        }
         $order = $user->orders()->where('isPaid', false)->with('products')->latest()->first();
-
         return view('cart', compact('order'));
     }
 };
