@@ -58,7 +58,7 @@
             </div>
             <div class="d-flex justify-content-center mb-4">
                 <span class="fw-bold"
-                    style="color:#ff6f61;background:#fffbe6;padding:0.5em 2em;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.25rem;letter-spacing:1px;">Reviews</span>
+                    style="color:#ff6f61;background:#fffbe6;padding:0.5em 2em;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.25rem;letter-spacing:1px;">Customer Reviews</span>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-10">
@@ -119,7 +119,6 @@
             <div class="d-flex justify-content-center mt-4">
                 <nav aria-label="Page navigation">
                     <ul class="pagination pagination-lg" style="--bs-pagination-border-radius:18px;">
-                        {{-- Previous Page Link --}}
                         @if ($reviews->onFirstPage())
                             <li class="page-item disabled">
                                 <span class="page-link"
@@ -137,7 +136,6 @@
                             </li>
                         @endif
 
-                        {{-- Pagination Elements --}}
                         @foreach ($reviews->getUrlRange(1, $reviews->lastPage()) as $page => $url)
                             <li class="page-item {{ $page == $reviews->currentPage() ? 'active' : '' }}">
                                 <a class="page-link"
@@ -150,7 +148,6 @@
                             </li>
                         @endforeach
 
-                        {{-- Next Page Link --}}
                         @if ($reviews->hasMorePages())
                             <li class="page-item">
                                 <a class="page-link"
