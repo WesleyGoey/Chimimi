@@ -26,10 +26,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/cart', [OrderController::class, 'cart'])->name('cart');
     Route::post('/cart/add', [OrderController::class, 'addToCart'])->name('cart.add');
-    Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
+    Route::put('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
+    Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 });
 
 Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {

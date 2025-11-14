@@ -23,9 +23,6 @@ class ReviewController extends Controller
         ]);
 
         $user = User::with(['reviews'])->find(Auth::id());
-        if (!$user) {
-            return redirect()->route('login');
-        }
 
         $user->reviews()->create([
             'rating' => $request->rating,
@@ -33,5 +30,31 @@ class ReviewController extends Controller
         ]);
 
         return redirect()->route('reviews')->with('success', 'Review submitted!');
+    }
+
+    public function destroy(\App\Models\Review $review)
+    {
+        $review->delete();
+        return redirect()->route('reviews')->with('success', 'Review deleted!');
+    }
+
+    public function edit(Review $review)
+    {
+        return view('reviews.edit', compact('review'));
+    }
+
+    public function update(Request $request, Review $review)
+    {
+        $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'required|string|max:255',
+        ]);
+
+        $review->update([
+            'rating' => $request->rating,
+            'comment' => $request->comment,
+        ]);
+
+        return redirect()->route('reviews')->with('success', 'Review updated!');
     }
 }

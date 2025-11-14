@@ -19,9 +19,6 @@ class OrderController extends Controller
     public function cart()
     {
         $user = User::with(['orders'])->find(Auth::id());
-        if (!$user) {
-            return redirect()->route('login');
-        }
         $order = $user->orders()->where('isPaid', false)->with('products')->latest()->first();
         return view('cart', compact('order'));
     }

@@ -48,41 +48,67 @@
                         @else
                             <div class="text-center py-4">
                                 <span class="fw-bold" style="color:#ff6f61;font-size:1.1rem;">
-                                    Please <a href="{{ route('login') }}" style="color:#f17807;text-decoration:underline;">login</a> to submit a review.
+                                    Please <a href="{{ route('login') }}"
+                                        style="color:#f17807;text-decoration:underline;">login</a> to submit a review.
                                 </span>
                             </div>
                         @endauth
                     </div>
                 </div>
             </div>
-
             <div class="d-flex justify-content-center mb-4">
                 <span class="fw-bold"
-                    style="color:#ff6f61;background:#fffbe6;padding:0.5em 2em;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.25rem;letter-spacing:1px;">Latest
-                    Reviews</span>
+                    style="color:#ff6f61;background:#fffbe6;padding:0.5em 2em;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.25rem;letter-spacing:1px;">Reviews</span>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="row">
                         @foreach ($reviews as $review)
-                            <div class="col-md-6 mb-4">
-                                <div class="card h-100 shadow-sm border-0" style="background:#fff;border-radius:18px;">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center mb-2">
-                                            <span class="fw-bold me-2" style="color:#ff6f61;">
-                                                {{ $review->user->username ?? 'Anonymous' }}
+                            <div class="d-flex justify-content-center mb-4">
+                                <div class="card shadow-sm"
+                                    style="background:#fffbe6;border-radius:32px;border:2px solid #fffbe6;max-width:750px;width:100%;
+                                        @if (auth()->check() && auth()->id() === $review->user_id) border: 2px solid #ff6f61;
+                                            box-shadow:0 0 0 4px #ffe066; @endif
+                                     ">
+                                    <div class="card-body px-4 py-4 position-relative">
+                                        <div class="d-flex align-items-center gap-3 mb-2">
+                                            <span class="fw-bold"
+                                                style="@if (auth()->check() && auth()->id() === $review->user_id) color:#ff6f61;background:#fffbe6;padding:0.18em 0.7em;border-radius:18px;border:2px solid #ff6f61;@else color:#ff6f61; @endif font-size:1rem;">
+                                                {{ auth()->check() && auth()->id() === $review->user_id ? 'You' : $review->user->username ?? 'Member' }}
                                             </span>
                                             <span>
                                                 @for ($i = 1; $i <= 5; $i++)
                                                     @if ($i <= $review->rating)
-                                                        <i class="bi bi-star-fill" style="color:#f17807;"></i>
+                                                        <i class="bi bi-star-fill"
+                                                            style="color:#f17807;font-size:1rem;"></i>
                                                     @else
-                                                        <i class="bi bi-star" style="color:#ffe066;"></i>
+                                                        <i class="bi bi-star" style="color:#ffe066;font-size:1rem;"></i>
                                                     @endif
                                                 @endfor
                                             </span>
                                         </div>
-                                        <div style="color:#f17807;font-size:1.05rem;">{{ $review->comment }}</div>
+                                        <div style="color:#f17807;font-size:1rem;">
+                                            {{ $review->comment }}
+                                        </div>
+                                        @if (auth()->check() && auth()->id() === $review->user_id)
+                                            <div
+                                                class="position-absolute top-50 end-0 translate-middle-y me-4 d-flex gap-2">
+                                                <a href="{{ route('reviews.edit', $review->id) }}"
+                                                    class="btn btn-sm btn-light" title="Edit"
+                                                    style="border-radius:50%;padding:8px 10px;">
+                                                    <i class="bi bi-pencil" style="color:#ff6f61;font-size:1.3rem;"></i>
+                                                </a>
+                                                <form method="POST" action="{{ route('reviews.destroy', $review->id) }}"
+                                                    style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-light" title="Delete"
+                                                        style="border-radius:50%;padding:8px 10px;">
+                                                        <i class="bi bi-trash" style="color:#f17807;font-size:1.3rem;"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -92,4 +118,30 @@
             </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('#star-rating .star');
+            const ratingInput = document.getElementById('rating');
+
+            stars.forEach((star, idx) => {
+                star.addEventListener('click', function() {
+                    const value = this.getAttribute('data-value');
+                    ratingInput.value = value;
+
+                    stars.forEach((s, i) => {
+                        if (i < value) {
+                            s.querySelector('i').classList.remove('bi-star');
+                            s.querySelector('i').classList.add('bi-star-fill');
+                            s.querySelector('i').style.color = '#f17807';
+                        } else {
+                            s.querySelector('i').classList.remove('bi-star-fill');
+                            s.querySelector('i').classList.add('bi-star');
+                            s.querySelector('i').style.color = '#ffe066';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 @endsection

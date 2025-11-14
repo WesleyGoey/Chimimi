@@ -44,7 +44,7 @@
                                             </button>
                                         </form>
                                     @else
-                                        <a href="/login" class="btn btn-lg px-4 py-2 w-75 d-flex justify-content-center align-items-center"
+                                        <a href="{{ route('login') }}" class="btn btn-lg px-4 py-2 w-75 d-flex justify-content-center align-items-center"
                                             style="background:#ff6f61;color:#fff;font-weight:600;border-radius:24px;box-shadow:0 2px 12px rgba(255,111,97,0.10);transition:background .2s;">
                                             <i class="bi bi-cart-plus me-2"></i> Add to Cart
                                         </a>

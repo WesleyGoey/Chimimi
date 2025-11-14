@@ -38,7 +38,7 @@
                                 style="font-weight:600;border-radius:28px;box-shadow:0 2px 8px rgba(255,111,97,0.10);">
                                 Edit Profile
                             </a>
-                            <form method="POST" action="/logout">
+                            <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit" class="btn btn-secondary px-4 py-2 w-100"
                                     style="font-weight:600;border-radius:28px;box-shadow:0 2px 8px rgba(0,0,0,0.07);">

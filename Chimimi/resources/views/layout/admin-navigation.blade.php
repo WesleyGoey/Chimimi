@@ -15,15 +15,15 @@
                 <ul class="navbar-nav mb-2 mb-lg-0 mx-auto d-flex flex-row" style="gap:2rem;">
                     <li class="nav-item">
                         <a class="nav-link text-white fw-bold fs-5 nav-link-hover {{ request()->is('admin/dashboard') ? 'active' : '' }}"
-                            href="/dashboard">Dashboard</a>
+                            href="{{ route('admin.dashboard') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white fw-bold fs-5 nav-link-hover {{ request()->is('admin/orders*') ? 'active' : '' }}"
-                            href="/orders">Orders</a>
+                            href="{{ route('admin.orders') }}">Orders</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white fw-bold fs-5 nav-link-hover {{ request()->is('admin/reviews*') ? 'active' : '' }}"
-                            href="/reviews">Reviews</a>
+                            href="{{ route('admin.reviews') }}">Reviews</a>
                     </li>
                 </ul>
             </div>

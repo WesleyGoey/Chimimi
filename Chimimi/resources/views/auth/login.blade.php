@@ -57,7 +57,7 @@
                         </form>
                         <div class="text-center mt-3">
                             <span style="color:#6b6b6b;">Don't have an account?</span>
-                            <a href="/register" style="color:#ff6f61;font-weight:700;text-decoration:underline;">
+                            <a href="{{ route('register') }}" style="color:#ff6f61;font-weight:700;text-decoration:underline;">
                                 Register
                             </a>
                         </div>

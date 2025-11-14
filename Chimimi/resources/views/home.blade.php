@@ -74,7 +74,7 @@
                         </p>
 
                          <div class="d-flex flex-wrap gap-2">
-                            <a href="/products"
+                            <a href="{{ route('products') }}"
                                class="btn px-4 py-2"
                                style="border-radius:28px;font-weight:600;background:#ff6f61;color:#fff;box-shadow:0 2px 8px rgba(255,111,97,0.13);display:flex;align-items:center;gap:0.5rem;">
                                 <i class="bi bi-bag-fill" style="font-size:1.3rem;"></i>
@@ -113,7 +113,7 @@
                             @endforeach
                         </div>
                         <div class="d-flex justify-content-center mt-4">
-                            <a href="/products" class="btn btn-lg btn-warning px-5 py-3"
+                            <a href="{{ route('products') }}" class="btn btn-lg btn-warning px-5 py-3"
                                 style="font-weight:600;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);">View
                                 All
                                 Menu</a>
