@@ -116,6 +116,60 @@
                     </div>
                 </div>
             </div>
+            <div class="d-flex justify-content-center mt-4">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination pagination-lg" style="--bs-pagination-border-radius:18px;">
+                        {{-- Previous Page Link --}}
+                        @if ($reviews->onFirstPage())
+                            <li class="page-item disabled">
+                                <span class="page-link"
+                                    style="background:#fffbe6;color:#ff6f61;border-radius:18px;border:2px solid #ffe066;font-weight:600;margin:0 6px;">
+                                    &laquo;
+                                </span>
+                            </li>
+                        @else
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="{{ $reviews->previousPageUrl() }}"
+                                    style="background:#fffbe6;color:#ff6f61;border-radius:18px;border:2px solid #ffe066;font-weight:600;margin:0 6px;">
+                                    &laquo;
+                                </a>
+                            </li>
+                        @endif
+
+                        {{-- Pagination Elements --}}
+                        @foreach ($reviews->getUrlRange(1, $reviews->lastPage()) as $page => $url)
+                            <li class="page-item {{ $page == $reviews->currentPage() ? 'active' : '' }}">
+                                <a class="page-link"
+                                    href="{{ $url }}"
+                                    style="background:{{ $page == $reviews->currentPage() ? '#ff6f61' : '#fffbe6' }};
+                                           color:{{ $page == $reviews->currentPage() ? '#fff' : '#ff6f61' }};
+                                           border-radius:18px;border:2px solid #ffe066;font-weight:600;margin:0 6px;">
+                                    {{ $page }}
+                                </a>
+                            </li>
+                        @endforeach
+
+                        {{-- Next Page Link --}}
+                        @if ($reviews->hasMorePages())
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="{{ $reviews->nextPageUrl() }}"
+                                    style="background:#fffbe6;color:#ff6f61;border-radius:18px;border:2px solid #ffe066;font-weight:600;margin:0 6px;">
+                                    &raquo;
+                                </a>
+                            </li>
+                        @else
+                            <li class="page-item disabled">
+                                <span class="page-link"
+                                    style="background:#fffbe6;color:#ff6f61;border-radius:18px;border:2px solid #ffe066;font-weight:600;margin:0 6px;">
+                                    &raquo;
+                                </span>
+                            </li>
+                        @endif
+                    </ul>
+                </nav>
+            </div>
         </div>
     </section>
 

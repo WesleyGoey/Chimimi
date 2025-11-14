@@ -11,7 +11,7 @@ class ReviewController extends Controller
 {
     public function index()
     {
-        $reviews = Review::with('user')->latest()->get();
+        $reviews = Review::with('user')->latest()->paginate(5);
         return view('reviews', compact('reviews'));
     }
 
