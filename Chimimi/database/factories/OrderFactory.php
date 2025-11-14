@@ -21,7 +21,7 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(), // Buat user baru otomatis
+            'user_id' => User::inRandomOrder()->first()->id,
             'amount' => 0,
             'isPaid' => false,
             'notes' => $this->faker->sentence()
