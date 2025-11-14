@@ -30,7 +30,6 @@ class OrderSeeder extends Seeder
                     'price_at_order' => $priceAtOrder,
                     'quantity' => $quantity,
                 ]);
-
                 $totalAmount += $priceAtOrder * $quantity;
             }
             $order->amount = $totalAmount;

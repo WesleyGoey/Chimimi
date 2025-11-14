@@ -34,8 +34,10 @@
                             </div>
                         </div>
                         <div class="d-flex flex-column gap-2 mt-2">
-                            <a href="#" class="btn btn-warning px-4 py-2 w-100"
-                                style="font-weight:600;border-radius:28px;box-shadow:0 2px 8px rgba(255,111,97,0.10);">Edit Profile</a>
+                            <a href="{{ route('profile.edit') }}" class="btn btn-warning px-4 py-2 w-100"
+                                style="font-weight:600;border-radius:28px;box-shadow:0 2px 8px rgba(255,111,97,0.10);">
+                                Edit Profile
+                            </a>
                             <form method="POST" action="/logout">
                                 @csrf
                                 <button type="submit" class="btn btn-secondary px-4 py-2 w-100"
@@ -45,10 +47,14 @@
                             </form>
                         </div>
                         <div class="mt-3">
-                            <a href="#" class="btn btn-outline-danger px-4 py-2 w-100"
-                                style="font-weight:600;border-radius:28px;box-shadow:0 2px 8px rgba(255,111,97,0.10);border-width:2px;">
-                                Delete My Account
-                            </a>
+                            <form method="POST" action="{{ route('profile.destroy') }}" onsubmit="return confirm('Are you sure you want to delete your account?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-danger px-4 py-2 w-100"
+                                    style="font-weight:600;border-radius:28px;box-shadow:0 2px 8px rgba(255,111,97,0.10);border-width:2px;">
+                                    Delete My Account
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
