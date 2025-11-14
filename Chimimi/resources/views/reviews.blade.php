@@ -14,48 +14,44 @@
                 <div class="col-md-7">
                     <div class="card shadow-lg p-4"
                         style="background:#fffbe6;border-radius:24px; border: 2.5px solid #ff6f61;">
-                        <div class="mb-3">
-                            <label class="form-label fw-bold" style="color:#ff6f61;">Rating</label>
-                            <div id="star-rating" class="d-flex gap-2 justify-content-center"
-                                style="font-size:2rem;cursor:pointer;">
-                                @for ($i = 1; $i <= 5; $i++)
-                                    <span class="star" data-value="{{ $i }}">
-                                        <i class="bi bi-star" style="color:#ffe066;"></i>
-                                    </span>
-                                @endfor
+                        @auth
+                            <form method="POST" action="{{ route('reviews.store') }}">
+                                @csrf
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold" style="color:#ff6f61;">Rating</label>
+                                    <div id="star-rating" class="d-flex gap-2 justify-content-center"
+                                        style="font-size:2rem;cursor:pointer;">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <span class="star" data-value="{{ $i }}">
+                                                <i class="bi bi-star" style="color:#ffe066;"></i>
+                                            </span>
+                                        @endfor
+                                    </div>
+                                    <input type="hidden" name="rating" id="rating" required>
+                                    @error('rating')
+                                        <div class="text-danger mt-1">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="comment" class="form-label fw-bold" style="color:#ff6f61;">Your Review</label>
+                                    <textarea class="form-control" id="comment" name="comment" rows="3" maxlength="255" required
+                                        style="border-radius:16px;"></textarea>
+                                    @error('comment')
+                                        <div class="text-danger mt-1">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn px-5 py-2"
+                                        style="background:#ff6f61;color:#fff;font-weight:600;border-radius:24px;box-shadow:0 2px 12px rgba(255,111,97,0.10);">Submit</button>
+                                </div>
+                            </form>
+                        @else
+                            <div class="text-center py-4">
+                                <span class="fw-bold" style="color:#ff6f61;font-size:1.1rem;">
+                                    Please <a href="{{ route('login') }}" style="color:#f17807;text-decoration:underline;">login</a> to submit a review.
+                                </span>
                             </div>
-                            <input type="hidden" name="rating" id="rating" required>
-                        </div>
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                const stars = document.querySelectorAll('#star-rating .star');
-                                const ratingInput = document.getElementById('rating');
-                                stars.forEach(star => {
-                                    star.addEventListener('click', function() {
-                                        const val = this.getAttribute('data-value');
-                                        ratingInput.value = val;
-                                        stars.forEach((s, idx) => {
-                                            if (idx < val) {
-                                                s.innerHTML =
-                                                    '<i class="bi bi-star-fill" style="color:#ffe066;"></i>';
-                                            } else {
-                                                s.innerHTML =
-                                                    '<i class="bi bi-star" style="color:#ffe066;"></i>';
-                                            }
-                                        });
-                                    });
-                                });
-                            });
-                        </script>
-                        <div class="mb-3">
-                            <label for="comment" class="form-label fw-bold" style="color:#ff6f61;">Your Review</label>
-                            <textarea class="form-control" id="comment" name="comment" rows="3" maxlength="255" required
-                                style="border-radius:16px;"></textarea>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn px-5 py-2"
-                                style="background:#ff6f61;color:#fff;font-weight:600;border-radius:24px;box-shadow:0 2px 12px rgba(255,111,97,0.10);">Submit</button>
-                        </div>
+                        @endauth
                     </div>
                 </div>
             </div>
@@ -74,12 +70,12 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-center mb-2">
                                             <span class="fw-bold me-2" style="color:#ff6f61;">
-                                                {{ $review->reviewerProfile->username }}
+                                                {{ $review->user->username ?? 'Anonymous' }}
                                             </span>
-                                            <span style="font-size:1.25rem;">
-                                                @for ($star = 1; $star <= 5; $star++)
-                                                    @if ($star <= $review->rating)
-                                                        <i class="bi bi-star-fill" style="color:#ffe066;"></i>
+                                            <span>
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $review->rating)
+                                                        <i class="bi bi-star-fill" style="color:#f17807;"></i>
                                                     @else
                                                         <i class="bi bi-star" style="color:#ffe066;"></i>
                                                     @endif

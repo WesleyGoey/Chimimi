@@ -11,17 +11,13 @@ class Review extends Model
     use HasFactory;
 
     protected $fillable = [
-        'profile_id',
+        'user_id',
         'rating',
         'comment',
     ];
 
-    public function reviewerProfile()
+    public function user()
     {
-        return $this->belongsTo(Profile::class, 'profile_id');
-    }
-    public static function latestTenReviews()
-    {
-        return self::with('reviewerProfile')->latest()->take(10)->get();
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

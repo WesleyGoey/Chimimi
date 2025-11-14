@@ -3,17 +3,36 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 
-Route::get('/', [HomeController::class, 'index']);
-
-Route::get('/products', [ProductController::class, 'index']);
-
-Route::get('/reviews', [ReviewController::class, 'index']);
-
-Route::get('/cart', function () {
-    return view('cart');
+Route::get('/', function () {
+    return view('home');
 });
 
-Route::get('/profile', [ProfileController::class, 'index']);
+// Breeze routes (login, register, etc)
+require __DIR__.'/auth.php';
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/products', [ProductController::class, 'index'])->name('products');
+Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/cart', [OrderController::class, 'cart'])->name('cart');
+    Route::get('/user', [UserController::class, 'index'])->name('user');
+    Route::post('/cart/add', [OrderController::class, 'addToCart'])->name('cart.add');
+    Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+});
+
+Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+    Route::get('/orders', function () {
+        return view('admin.orders');
+    })->name('admin.orders');
+    Route::get('/reviews', function () {
+        return view('admin.reviews');
+    })->name('admin.reviews');
+});

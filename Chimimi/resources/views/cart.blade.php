@@ -15,10 +15,6 @@
                 <div class="col-12 col-md-7">
                     <div class="card shadow-lg p-3 p-md-4"
                         style="background:#fffbe6;border-radius:24px; border: 2.5px solid #ff6f61;">
-                        @php
-                            $profile = \App\Models\Profile::with('orders.products')->find(1);
-                            $order = $profile ? $profile->orders->first() : null;
-                        @endphp
                         @if ($order)
                             <div class="mb-4 pt-4">
                                 @if (isset($order->products) && count($order->products))
