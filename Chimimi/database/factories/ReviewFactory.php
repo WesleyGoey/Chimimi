@@ -21,7 +21,7 @@ class ReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::inRandomOrder()->first()->id,
+            'user_id' => User::factory(),
             'rating' => $this->faker->numberBetween(1, 5),
             'comment' => $this->faker->sentence(),
         ];

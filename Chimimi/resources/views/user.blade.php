@@ -20,23 +20,23 @@
                                 style="background:#fff;border-radius:50%;width:100px;height:100px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 16px rgba(255,111,97,0.12);margin-bottom:1rem;">
                                 <i class="bi bi-person-circle" style="color:#ff6f61;font-size:3.5rem;"></i>
                             </span>
-                            <h2 class="fw-bold mb-0" style="color:#ff6f61;font-size:1.6rem;">{{ auth()->user()->username }}</h2>
+                            <h2 class="fw-bold mb-0" style="color:#ff6f61;font-size:1.6rem;">{{ $user->username }}</h2>
                         </div>
                         <div class="mb-3 px-3 py-3"
                             style="background:#fff;border-radius:18px;box-shadow:0 2px 8px rgba(255,111,97,0.07);">
                             <div class="row mb-2 align-items-center">
                                 <div class="col-4 text-end fw-bold" style="color:#f17807;">Email</div>
-                                <div class="col-8" style="color:#ff6f61;word-break:break-all;">{{ auth()->user()->email }}</div>
+                                <div class="col-8" style="color:#ff6f61;word-break:break-all;">{{ $user->email }}</div>
                             </div>
                             <div class="row mb-1 align-items-center">
                                 <div class="col-4 text-end fw-bold" style="color:#f17807;">Phone</div>
-                                <div class="col-8" style="color:#ff6f61;">{{ $user->phone ?? '-' }}</div>
+                                <div class="col-8" style="color:#ff6f61;">{{ $user->phone }}</div>
                             </div>
                         </div>
                         <div class="d-flex flex-column gap-2 mt-2">
                             <a href="#" class="btn btn-warning px-4 py-2 w-100"
                                 style="font-weight:600;border-radius:28px;box-shadow:0 2px 8px rgba(255,111,97,0.10);">Edit Profile</a>
-                            <form method="POST" action="{{ route('logout') }}">
+                            <form method="POST" action="/logout">
                                 @csrf
                                 <button type="submit" class="btn btn-secondary px-4 py-2 w-100"
                                     style="font-weight:600;border-radius:28px;box-shadow:0 2px 8px rgba(0,0,0,0.07);">

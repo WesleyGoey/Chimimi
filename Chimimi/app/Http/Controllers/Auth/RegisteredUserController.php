@@ -41,6 +41,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => bcrypt($request->password),
+            'status' => 'member',
         ]);
 
         event(new Registered($user));

@@ -6,6 +6,7 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -17,7 +18,7 @@ class OrderController extends Controller
 
     public function cart()
     {
-        $user = auth()->user();
+        $user = User::with(['orders'])->find(Auth::id());
         if (!$user) {
             return redirect()->route('login');
         }

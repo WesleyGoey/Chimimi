@@ -14,13 +14,25 @@ Route::get('/', function () {
 // Breeze routes (login, register, etc)
 require __DIR__.'/auth.php';
 
-// Custom routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
 
 Route::middleware('auth')->group(function () {
     Route::get('/cart', [OrderController::class, 'cart'])->name('cart');
-    Route::get('/user', [UserController::class, 'index'])->name('user'); // Sudah ada middleware
+    Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::post('/cart/add', [OrderController::class, 'addToCart'])->name('cart.add');
+    Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+});
+
+Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+    Route::get('/orders', function () {
+        return view('admin.orders');
+    })->name('admin.orders');
+    Route::get('/reviews', function () {
+        return view('admin.reviews');
+    })->name('admin.reviews');
 });

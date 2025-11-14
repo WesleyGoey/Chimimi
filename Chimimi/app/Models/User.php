@@ -3,10 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Order;
+use App\Models\Review;
 
 class User extends Authenticatable
 {
@@ -23,6 +27,7 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
+        'status',
     ];
 
     /**
@@ -48,12 +53,17 @@ class User extends Authenticatable
         ];
     }
 
-     public function reviews(): HasMany{
+    public function reviews(): HasMany
+    {
         return $this->hasMany(Review::class);
     }
 
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+    public function isAdmin(): bool
+    {
+        return $this->status === 'admin';
     }
 }
