@@ -76,7 +76,7 @@ class AdminProductController extends Controller
         return redirect()->route('admin.products')->with('success', 'Product updated!');
     }
     
-     public function destroy(\App\Models\Product $product)
+     public function destroy(Product $product)
     {
         $product->delete();
         return redirect()->route('admin.products')->with('success', 'Product deleted!');
