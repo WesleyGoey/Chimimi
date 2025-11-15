@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminProductController;
 
 Route::get('/', function () {
     return view('home');
@@ -39,6 +40,9 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
+    Route::get('/products', [AdminProductController::class, 'index'])->name('admin.products');
+    Route::get('/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
+    Route::post('/products', [AdminProductController::class, 'store'])->name('admin.products.store');
     Route::get('/orders', function () {
         return view('admin.orders');
     })->name('admin.orders');
