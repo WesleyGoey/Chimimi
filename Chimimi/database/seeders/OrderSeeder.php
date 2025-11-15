@@ -17,6 +17,11 @@ class OrderSeeder extends Seeder
         $products = \App\Models\Product::all();
         $faker = \Faker\Factory::create();
 
+        // Antisipasi jika tidak ada produk
+        if ($products->isEmpty()) {
+            return;
+        }
+
         foreach ($orders as $order) {
             $totalAmount = 0;
             $selectedProducts = $products->random(rand(1, 6));
@@ -30,7 +35,6 @@ class OrderSeeder extends Seeder
                     'price_at_order' => $priceAtOrder,
                     'quantity' => $quantity,
                 ]);
-
                 $totalAmount += $priceAtOrder * $quantity;
             }
             $order->amount = $totalAmount;

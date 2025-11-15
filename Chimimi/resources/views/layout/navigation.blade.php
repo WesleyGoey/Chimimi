@@ -19,15 +19,15 @@
                 <ul class="navbar-nav mb-2 mb-lg-0 mx-auto d-flex flex-row" style="gap:2rem;">
                     <li class="nav-item">
                         <a class="nav-link text-white fw-bold fs-5 nav-link-hover {{ request()->is('/') ? 'active' : '' }}"
-                            href="/">Home</a>
+                            href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white fw-bold fs-5 nav-link-hover {{ request()->is('product*') ? 'active' : '' }}"
-                            href="/products">Products</a>
+                            href="{{ route('products') }}">Products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white fw-bold fs-5 nav-link-hover {{ request()->is('reviews*') ? 'active' : '' }}"
-                            href="/reviews">Reviews</a>
+                            href="{{ route('reviews') }}">Reviews</a>
                     </li>
                 </ul>
             </div>
@@ -56,7 +56,7 @@
                 @guest
                     <li class="nav-item">
                         <a class="btn fw-bold px-4 py-2"
-                           href="{{ route('login') }}"
+                           href="/login"
                            style="background:#fffbe6;color:#ff6f61;border-radius:28px;box-shadow:0 2px 12px rgba(255,111,97,0.13);font-weight:700;transition:background .2s;">
                             Login
                         </a>

@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('category');
             $table->text('ingredients');
-            $table->decimal('price_frozen');
-            $table->decimal('price_cooked');
+            $table->integer('price_frozen');
+            $table->integer('price_cooked');
             $table->string('image_path');
             $table->timestamps();
         });

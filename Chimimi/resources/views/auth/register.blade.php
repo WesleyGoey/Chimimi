@@ -78,7 +78,7 @@
                         </form>
                         <div class="text-center mt-3">
                             <span style="color:#6b6b6b;">Already have an account?</span>
-                            <a href="/login" style="color:#ff6f61;font-weight:700;text-decoration:underline;">
+                            <a href="{{ route('login') }}" style="color:#ff6f61;font-weight:700;text-decoration:underline;">
                                 Login
                             </a>
                         </div>
