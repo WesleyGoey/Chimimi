@@ -49,7 +49,8 @@
                             <div class="card-body text-center d-flex flex-column">
                                 <h5 class="card-title mb-2" style="color:#ff6f61;font-weight:600;">{{ $product->name }}</h5>
                                 <div class="mb-2" style="color:#f17807;font-size:1rem;font-weight:500;">
-                                    {{ $product->category }}</div>
+                                    {{ $product->category }}
+                                </div>
                                 <div class="mb-2" style="color:#ff6f61;font-size:0.95rem;">{{ $product->ingredients }}</div>
                                 <div class="mt-auto mb-3">
                                     <span class="badge bg-warning text-dark me-2"
@@ -57,6 +58,21 @@
                                         {{ $product->price_frozen / 1000 }}K / pax</span>
                                     <span class="badge bg-danger" style="font-size:1rem;border-radius:16px;">Cooked:
                                         {{ $product->price_cooked / 1000 }}K / pax</span>
+                                </div>
+                                <div class="d-flex justify-content-center gap-2 mt-3">
+                                    <a href="{{ route('admin.products.edit', $product->id) }}"
+                                        class="btn fw-bold px-4 py-2"
+                                        style="border-radius:18px;background:#fff;color:#ff6f61;border:2px solid #ff6f61;">
+                                        <i class="bi bi-pencil me-1"></i> Edit
+                                    </a>
+                                    <form method="POST" action="{{ route('admin.products.destroy', $product->id) }}" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn fw-bold px-4 py-2"
+                                            style="border-radius:18px;background:#fff;color:#ff6f61;border:2px solid #ff6f61;">
+                                            <i class="bi bi-trash me-1"></i> Delete
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

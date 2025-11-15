@@ -58,114 +58,85 @@
             </div>
             <div class="d-flex justify-content-center mb-4">
                 <span class="fw-bold"
-                    style="color:#ff6f61;background:#fffbe6;padding:0.5em 2em;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.25rem;letter-spacing:1px;">Customer Reviews</span>
+                    style="color:#ff6f61;background:#fffbe6;padding:0.5em 2em;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.25rem;letter-spacing:1px;">
+                    Customer Reviews
+                </span>
             </div>
             <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="row">
-                        @foreach ($reviews as $review)
-                            <div class="d-flex justify-content-center mb-4">
-                                <div class="card shadow-sm"
-                                    style="background:#fffbe6;border-radius:32px;border:2px solid #fffbe6;max-width:750px;width:100%;
-                                        @if (auth()->check() && auth()->id() === $review->user_id) border: 2px solid #ff6f61;
-                                            box-shadow:0 0 0 4px #ffe066; @endif
-                                     ">
-                                    <div class="card-body px-4 py-4 position-relative">
-                                        <div class="d-flex align-items-center gap-3 mb-2">
-                                            <span class="fw-bold"
-                                                style="@if (auth()->check() && auth()->id() === $review->user_id) color:#ff6f61;background:#fffbe6;padding:0.18em 0.7em;border-radius:18px;border:2px solid #ff6f61;@else color:#ff6f61; @endif font-size:1rem;">
-                                                {{ auth()->check() && auth()->id() === $review->user_id ? 'You' : $review->user->username ?? 'Member' }}
-                                            </span>
-                                            <span>
-                                                @for ($i = 1; $i <= 5; $i++)
-                                                    @if ($i <= $review->rating)
-                                                        <i class="bi bi-star-fill"
-                                                            style="color:#f17807;font-size:1rem;"></i>
-                                                    @else
-                                                        <i class="bi bi-star" style="color:#ffe066;font-size:1rem;"></i>
-                                                    @endif
-                                                @endfor
-                                            </span>
-                                        </div>
-                                        <div style="color:#f17807;font-size:1rem;">
-                                            {{ $review->comment }}
-                                        </div>
-                                        @if (auth()->check() && auth()->id() === $review->user_id)
-                                            <div
-                                                class="position-absolute top-50 end-0 translate-middle-y me-4 d-flex gap-2">
-                                                <a href="{{ route('reviews.edit', $review->id) }}"
-                                                    class="btn btn-sm btn-light" title="Edit"
-                                                    style="border-radius:50%;padding:8px 10px;">
-                                                    <i class="bi bi-pencil" style="color:#ff6f61;font-size:1.3rem;"></i>
-                                                </a>
-                                                <form method="POST" action="{{ route('reviews.destroy', $review->id) }}"
-                                                    style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-light" title="Delete"
-                                                        style="border-radius:50%;padding:8px 10px;">
-                                                        <i class="bi bi-trash" style="color:#f17807;font-size:1.3rem;"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        @endif
+                @if ($reviews->count() === 0)
+                    <div class="row justify-content-center align-items-center" style="min-height:20vh;">
+                        <div class="col-12 d-flex justify-content-center">
+                            <div style="
+                                background:#fffbe6;
+                                border-radius:18px;
+                                color:#ff6f61;
+                                font-size:2rem;
+                                font-weight:700;
+                                padding:2rem 0;
+                                width:100%;
+                                max-width:700px;
+                                text-align:center;
+                                box-shadow:0 2px 12px rgba(255,111,97,0.10);
+                            ">
+                                No reviews available
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    @foreach ($reviews as $review)
+                        <div class="d-flex justify-content-center mb-4">
+                            <div class="card shadow-sm"
+                                style="background:#fffbe6;border-radius:32px;border:2px solid #fffbe6;max-width:750px;width:100%;
+                                    @if (auth()->check() && auth()->id() === $review->user_id) border: 2px solid #ff6f61;
+                                        box-shadow:0 0 0 4px #ffe066; @endif
+                             ">
+                                <div class="card-body px-4 py-4 position-relative">
+                                    <div class="d-flex align-items-center gap-3 mb-2">
+                                        <span class="fw-bold"
+                                            style="@if (auth()->check() && auth()->id() === $review->user_id) color:#ff6f61;background:#fffbe6;padding:0.18em 0.7em;border-radius:18px;border:2px solid #ff6f61;@else color:#ff6f61; @endif font-size:1rem;">
+                                            {{ auth()->check() && auth()->id() === $review->user_id ? 'You' : $review->user->username ?? 'Member' }}
+                                        </span>
+                                        <span>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @if ($i <= $review->rating)
+                                                    <i class="bi bi-star-fill"
+                                                        style="color:#f17807;font-size:1rem;"></i>
+                                                @else
+                                                    <i class="bi bi-star" style="color:#ffe066;font-size:1rem;"></i>
+                                                @endif
+                                            @endfor
+                                        </span>
                                     </div>
+                                    <div style="color:#f17807;font-size:1rem;">
+                                        {{ $review->comment }}
+                                    </div>
+                                    @if (auth()->check() && auth()->id() === $review->user_id)
+                                        <div
+                                            class="position-absolute top-50 end-0 translate-middle-y me-4 d-flex gap-2">
+                                            <a href="{{ route('reviews.edit', $review->id) }}"
+                                                class="btn btn-sm btn-light" title="Edit"
+                                                style="border-radius:50%;padding:8px 10px;">
+                                                <i class="bi bi-pencil" style="color:#ff6f61;font-size:1.3rem;"></i>
+                                            </a>
+                                            <form method="POST" action="{{ route('reviews.destroy', $review->id) }}"
+                                                style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-light" title="Delete"
+                                                    style="border-radius:50%;padding:8px 10px;">
+                                                    <i class="bi bi-trash" style="color:#f17807;font-size:1.3rem;"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
+                    @endforeach
+                    <div class="d-flex justify-content-center mt-4">
+                        {{ $reviews->links() }}
                     </div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-center mt-4">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination pagination-lg" style="--bs-pagination-border-radius:18px;">
-                        @if ($reviews->onFirstPage())
-                            <li class="page-item disabled">
-                                <span class="page-link"
-                                    style="background:#fffbe6;color:#ff6f61;border-radius:18px;border:2px solid #ffe066;font-weight:600;margin:0 6px;">
-                                    &laquo;
-                                </span>
-                            </li>
-                        @else
-                            <li class="page-item">
-                                <a class="page-link"
-                                    href="{{ $reviews->previousPageUrl() }}"
-                                    style="background:#fffbe6;color:#ff6f61;border-radius:18px;border:2px solid #ffe066;font-weight:600;margin:0 6px;">
-                                    &laquo;
-                                </a>
-                            </li>
-                        @endif
-
-                        @foreach ($reviews->getUrlRange(1, $reviews->lastPage()) as $page => $url)
-                            <li class="page-item {{ $page == $reviews->currentPage() ? 'active' : '' }}">
-                                <a class="page-link"
-                                    href="{{ $url }}"
-                                    style="background:{{ $page == $reviews->currentPage() ? '#ff6f61' : '#fffbe6' }};
-                                           color:{{ $page == $reviews->currentPage() ? '#fff' : '#ff6f61' }};
-                                           border-radius:18px;border:2px solid #ffe066;font-weight:600;margin:0 6px;">
-                                    {{ $page }}
-                                </a>
-                            </li>
-                        @endforeach
-
-                        @if ($reviews->hasMorePages())
-                            <li class="page-item">
-                                <a class="page-link"
-                                    href="{{ $reviews->nextPageUrl() }}"
-                                    style="background:#fffbe6;color:#ff6f61;border-radius:18px;border:2px solid #ffe066;font-weight:600;margin:0 6px;">
-                                    &raquo;
-                                </a>
-                            </li>
-                        @else
-                            <li class="page-item disabled">
-                                <span class="page-link"
-                                    style="background:#fffbe6;color:#ff6f61;border-radius:18px;border:2px solid #ffe066;font-weight:600;margin:0 6px;">
-                                    &raquo;
-                                </span>
-                            </li>
-                        @endif
-                    </ul>
-                </nav>
+                @endif
             </div>
         </div>
     </section>

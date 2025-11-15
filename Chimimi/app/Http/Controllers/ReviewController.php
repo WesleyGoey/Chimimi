@@ -31,13 +31,6 @@ class ReviewController extends Controller
 
         return redirect()->route('reviews')->with('success', 'Review submitted!');
     }
-
-    public function destroy(\App\Models\Review $review)
-    {
-        $review->delete();
-        return redirect()->route('reviews')->with('success', 'Review deleted!');
-    }
-
     public function edit(Review $review)
     {
         return view('reviews.edit', compact('review'));
@@ -56,5 +49,10 @@ class ReviewController extends Controller
         ]);
 
         return redirect()->route('reviews')->with('success', 'Review updated!');
+    }
+    public function destroy(\App\Models\Review $review)
+    {
+        $review->delete();
+        return redirect()->route('reviews')->with('success', 'Review deleted!');
     }
 }
