@@ -8,6 +8,9 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminProductController;
+use App\Http\Controllers\AdminReviewController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminOrderController;
 
 Route::get('/', function () {
     return view('home');
@@ -36,12 +39,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
-    Route::get('/dashboard', function () {
-        $ordersCount = \App\Models\Order::count();
-        $reviewsCount = \App\Models\Review::count();
-
-        return view('admin.dashboard', compact('ordersCount', 'reviewsCount'));
-    })->name('admin.dashboard');
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
     Route::get('/products', [AdminProductController::class, 'index'])->name('admin.products');
     Route::get('/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
@@ -50,15 +48,8 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::put('/products/{product}', [AdminProductController::class, 'update'])->name('admin.products.update');
     Route::delete('/products/{product}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
 
-    Route::get('/orders', function () {
-        $orders = \App\Models\Order::with(['user', 'products'])->orderBy('created_at', 'desc')->get();
-
-        return view('admin.orders', compact('orders'));
-    })->name('admin.orders');
+    Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders');
     
-    Route::get('/reviews', function () {
-        $reviews = \App\Models\Review::with('user')->latest()->get();
-
-        return view('admin.reviews', compact('reviews'));
-    })->name('admin.reviews');
+    Route::get('/reviews', [AdminReviewController::class, 'index'])->name('admin.reviews');
+     Route::delete('/reviews/{review}', [AdminReviewController::class, 'destroy'])->name('admin.reviews.destroy');
 });

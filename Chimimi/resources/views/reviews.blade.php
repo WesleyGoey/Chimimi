@@ -86,45 +86,44 @@
                     @foreach ($reviews as $review)
                         <div class="d-flex justify-content-center mb-4">
                             <div class="card shadow-sm"
-                                style="background:#fffbe6;border-radius:32px;border:2px solid #fffbe6;max-width:750px;width:100%;
-                                    @if (auth()->check() && auth()->id() === $review->user_id) border: 2px solid #ff6f61;
-                                        box-shadow:0 0 0 4px #ffe066; @endif
-                             ">
+                                style="background:#fffbe6;border-radius:24px;border:2px solid #ff6f61;max-width:700px;width:100%;">
                                 <div class="card-body px-4 py-4 position-relative">
-                                    <div class="d-flex align-items-center gap-3 mb-2">
-                                        <span class="fw-bold"
-                                            style="@if (auth()->check() && auth()->id() === $review->user_id) color:#ff6f61;background:#fffbe6;padding:0.18em 0.7em;border-radius:18px;border:2px solid #ff6f61;@else color:#ff6f61; @endif font-size:1rem;">
-                                            {{ auth()->check() && auth()->id() === $review->user_id ? 'You' : $review->user->username ?? 'Member' }}
-                                        </span>
-                                        <span>
-                                            @for ($i = 1; $i <= 5; $i++)
-                                                @if ($i <= $review->rating)
-                                                    <i class="bi bi-star-fill"
-                                                        style="color:#f17807;font-size:1rem;"></i>
-                                                @else
-                                                    <i class="bi bi-star" style="color:#ffe066;font-size:1rem;"></i>
-                                                @endif
-                                            @endfor
-                                        </span>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span class="fw-bold" style="color:#ff6f61;font-size:1.15rem;">
+                                                {{ auth()->check() && auth()->id() === $review->user_id ? 'You' : $review->user->username ?? 'Member' }}
+                                            </span>
+                                            <span>
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $review->rating)
+                                                        <i class="bi bi-star-fill" style="color:#f17807;font-size:1.15rem;"></i>
+                                                    @else
+                                                        <i class="bi bi-star" style="color:#ffe066;font-size:1.15rem;"></i>
+                                                    @endif
+                                                @endfor
+                                            </span>
+                                        </div>
+                                        <div class="text-muted" style="font-size:1rem;">
+                                            <i class="bi bi-clock me-1"></i> Posted: {{ $review->created_at->format('d M Y H:i') }}
+                                        </div>
                                     </div>
-                                    <div style="color:#f17807;font-size:1rem;">
+                                    <hr style="border-top:1.5px solid #ffe066;">
+                                    <div style="color:#333;font-size:1.08rem;" class="mb-3">
                                         {{ $review->comment }}
                                     </div>
                                     @if (auth()->check() && auth()->id() === $review->user_id)
-                                        <div
-                                            class="position-absolute top-50 end-0 translate-middle-y me-4 d-flex gap-2">
+                                        <div class="d-flex justify-content-end gap-2 mt-2">
                                             <a href="{{ route('reviews.edit', $review->id) }}"
-                                                class="btn btn-sm btn-light" title="Edit"
-                                                style="border-radius:50%;padding:8px 10px;">
-                                                <i class="bi bi-pencil" style="color:#ff6f61;font-size:1.3rem;"></i>
+                                                class="btn btn-sm fw-bold"
+                                                style="border-radius:14px;background:#fff;color:#ff6f61;border:2px solid #ff6f61;font-size:1rem;padding:0.5rem 1.2rem;">
+                                                <i class="bi bi-pencil me-1"></i> Edit
                                             </a>
-                                            <form method="POST" action="{{ route('reviews.destroy', $review->id) }}"
-                                                style="display:inline;">
+                                            <form method="POST" action="{{ route('reviews.destroy', $review->id) }}" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-light" title="Delete"
-                                                    style="border-radius:50%;padding:8px 10px;">
-                                                    <i class="bi bi-trash" style="color:#f17807;font-size:1.3rem;"></i>
+                                                <button type="submit" class="btn btn-sm fw-bold"
+                                                    style="border-radius:14px;background:#fff;color:#ff6f61;border:2px solid #ff6f61;font-size:1rem;padding:0.5rem 1.2rem;">
+                                                    <i class="bi bi-trash me-1"></i> Delete
                                                 </button>
                                             </form>
                                         </div>
