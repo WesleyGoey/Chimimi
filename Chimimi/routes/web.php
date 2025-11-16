@@ -37,8 +37,12 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('admin.dashboard');
+        $ordersCount = \App\Models\Order::count();
+        $reviewsCount = \App\Models\Review::count();
+
+        return view('admin.dashboard', compact('ordersCount', 'reviewsCount'));
     })->name('admin.dashboard');
+
     Route::get('/products', [AdminProductController::class, 'index'])->name('admin.products');
     Route::get('/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
     Route::post('/products', [AdminProductController::class, 'store'])->name('admin.products.store');
@@ -47,10 +51,14 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::delete('/products/{product}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
 
     Route::get('/orders', function () {
-        return view('admin.orders');
+        $orders = \App\Models\Order::with(['user', 'products'])->orderBy('created_at', 'desc')->get();
+
+        return view('admin.orders', compact('orders'));
     })->name('admin.orders');
     
     Route::get('/reviews', function () {
-        return view('admin.reviews');
+        $reviews = \App\Models\Review::with('user')->latest()->get();
+
+        return view('admin.reviews', compact('reviews'));
     })->name('admin.reviews');
 });
