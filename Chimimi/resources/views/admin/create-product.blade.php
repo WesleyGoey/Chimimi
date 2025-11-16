@@ -13,28 +13,28 @@
                     <form method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label fw-bold" style="color:#ff6f61;">Name</label>
-                            <input type="text" name="name" class="form-control" required style="border-radius:16px;">
+                            <label for="name" class="form-label fw-bold" style="color:#ff6f61;">Product Name</label>
+                            <input type="text" name="name" id="name" class="form-control" required style="border-radius:16px;" placeholder="e.g. Beef Mayo">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-bold" style="color:#ff6f61;">Category</label>
-                            <input type="text" name="category" class="form-control" required style="border-radius:16px;">
+                            <label for="category" class="form-label fw-bold" style="color:#ff6f61;">Category</label>
+                            <input type="text" name="category" id="category" class="form-control" required style="border-radius:16px;" placeholder="e.g. Savory">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-bold" style="color:#ff6f61;">Ingredients</label>
-                            <textarea name="ingredients" class="form-control" rows="2" required style="border-radius:16px;"></textarea>
+                            <label for="ingredients" class="form-label fw-bold" style="color:#ff6f61;">Ingredients</label>
+                            <textarea name="ingredients" id="ingredients" class="form-control" rows="2" required style="border-radius:16px;" placeholder="e.g. Smoked Beef, Mayonnaise, Egg, Cheese"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-bold" style="color:#ff6f61;">Price Frozen</label>
-                            <input type="number" name="price_frozen" class="form-control" required min="0" step="1000" style="border-radius:16px;">
+                            <label for="price_frozen" class="form-label fw-bold" style="color:#ff6f61;">Price Frozen</label>
+                            <input type="number" name="price_frozen" id="price_frozen" class="form-control" required min="0" step="1000" style="border-radius:16px;" placeholder="e.g. 50000">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-bold" style="color:#ff6f61;">Price Cooked</label>
-                            <input type="number" name="price_cooked" class="form-control" required min="0" step="1000" style="border-radius:16px;">
+                            <label for="price_cooked" class="form-label fw-bold" style="color:#ff6f61;">Price Cooked</label>
+                            <input type="number" name="price_cooked" id="price_cooked" class="form-control" required min="0" step="1000" style="border-radius:16px;" placeholder="e.g. 55000">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-bold" style="color:#ff6f61;">Image</label>
-                            <input type="file" name="image" class="form-control" required style="border-radius:16px;">
+                            <label for="image" class="form-label fw-bold" style="color:#ff6f61;">Product Image</label>
+                            <input type="file" name="image" id="image" class="form-control" style="border-radius:16px;" placeholder="jpg, jpeg, png">
                         </div>
                         <div class="d-flex justify-content-center">
                             <button type="submit" class="btn px-5 py-2"

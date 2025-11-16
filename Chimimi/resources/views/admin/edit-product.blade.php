@@ -17,28 +17,31 @@
                             <div class="mb-3">
                                 <label class="form-label fw-bold" style="color:#ff6f61;">Name</label>
                                 <input type="text" name="name" class="form-control" required
-                                    style="border-radius:16px;" value="{{ old('name', $product->name) }}">
+                                    style="border-radius:16px;" value="{{ old('name', $product->name) }}"
+                                    placeholder="e.g. Beef Mayo">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold" style="color:#ff6f61;">Category</label>
                                 <input type="text" name="category" class="form-control" required
-                                    style="border-radius:16px;" value="{{ old('category', $product->category) }}">
+                                    style="border-radius:16px;" value="{{ old('category', $product->category) }}"
+                                    placeholder="e.g. Savory">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold" style="color:#ff6f61;">Ingredients</label>
-                                <textarea name="ingredients" class="form-control" rows="2" required style="border-radius:16px;">{{ old('ingredients', $product->ingredients) }}</textarea>
+                                <textarea name="ingredients" class="form-control" rows="2" required style="border-radius:16px;"
+                                    placeholder="e.g. Smoked Beef, Mayonnaise, Egg, Cheese">{{ old('ingredients', $product->ingredients) }}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold" style="color:#ff6f61;">Price Frozen</label>
                                 <input type="number" name="price_frozen" class="form-control" required min="0"
                                     step="1000" style="border-radius:16px;"
-                                    value="{{ old('price_frozen', $product->price_frozen) }}">
+                                    value="{{ old('price_frozen', $product->price_frozen) }}" placeholder="e.g. 50000">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold" style="color:#ff6f61;">Price Cooked</label>
                                 <input type="number" name="price_cooked" class="form-control" required min="0"
                                     step="1000" style="border-radius:16px;"
-                                    value="{{ old('price_cooked', $product->price_cooked) }}">
+                                    value="{{ old('price_cooked', $product->price_cooked) }}" placeholder="e.g. 55000">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold" style="color:#ff6f61;">Image</label>
