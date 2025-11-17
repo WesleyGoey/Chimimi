@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreOrderRequest;
-use App\Http\Requests\UpdateOrderRequest;
-use App\Models\Order;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;  // ← TAMBAHKAN INI
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
 
 class OrderController extends Controller
 {
@@ -58,7 +57,7 @@ class OrderController extends Controller
 
     public function selectProduct($productId)
     {
-        $product = \App\Models\Product::findOrFail($productId);
+        $product = Product::findOrFail($productId);
         return view('order.cart-select', compact('product'));
     }
 
@@ -69,11 +68,12 @@ class OrderController extends Controller
             'product_type' => 'required|in:Frozen,Cooked',
             'quantity' => 'required|integer|min:1'
         ]);
-        $user = User::find(Auth::id());
+        
+         $user = User::find(Auth::id());
         $productId = $request->product_id;
         $quantity = $request->quantity;
         $productType = $request->product_type;
-        $product = \App\Models\Product::find($productId);
+        $product = Product::find($productId);
         $priceAtOrder = ($productType == 'Frozen') ? $product->price_frozen : $product->price_cooked;
 
         $order = $user->orders()->where('isPaid', false)->where('amount', 0)->latest()->first();
@@ -84,18 +84,26 @@ class OrderController extends Controller
             ]);
         }
 
-        $existing = $order->products()
-            ->where('products.id', $productId)
-            ->wherePivot('product_type', $productType)
+        // Cek pivot berdasarkan product_id DAN product_type
+        $existingPivot = DB::table('order_products')
+            ->where('order_id', $order->id)
+            ->where('product_id', $productId)
+            ->where('product_type', $productType)
             ->first();
 
-        if ($existing) {
-            $order->products()->updateExistingPivot($productId, [
-                'quantity' => $existing->pivot->quantity + $quantity,
-                'product_type' => $productType,
-                'price_at_order' => $priceAtOrder,
-            ]);
+        if ($existingPivot) {
+            // Update quantity
+            DB::table('order_products')
+                ->where('order_id', $order->id)
+                ->where('product_id', $productId)
+                ->where('product_type', $productType)
+                ->update([
+                    'quantity' => $existingPivot->quantity + $quantity,
+                    'price_at_order' => $priceAtOrder,
+                    'updated_at' => now()
+                ]);
         } else {
+            // Insert baru
             $order->products()->attach($productId, [
                 'product_type' => $productType,
                 'price_at_order' => $priceAtOrder,
@@ -106,38 +114,83 @@ class OrderController extends Controller
         return redirect()->route('cart')->with('success', 'Product added to cart!');
     }
 
-    public function updateType(Request $request, $productId)
+    public function editCart($productId, $productType)
     {
+        $product = Product::findOrFail($productId);
         $user = User::find(Auth::id());
         $order = $user->orders()->where('isPaid', false)->where('amount', 0)->latest()->first();
-
-        if ($order) {
-            $productType = $request->product_type;
-            $quantity = $request->quantity;
-            $product = \App\Models\Product::find($productId);
-            $priceAtOrder = ($productType == 'Frozen') ? $product->price_frozen : $product->price_cooked;
-            $order->products()->updateExistingPivot($productId, [
-                'product_type' => $productType,
-                'price_at_order' => $priceAtOrder,
-                'quantity' => $quantity
-            ]);
-        }
-        return response()->json(['success' => true]);
+        $pivot = $order->products()->wherePivot('product_type', $productType)->where('products.id', $productId)->first()->pivot;
+        $quantity = $pivot->quantity;
+        return view('order.cart-edit', compact('product', 'productType', 'quantity'));
     }
-    
-    public function updateQuantity(Request $request, $productId, $productType)
-    {
-        $user = User::find(Auth::id());
-        $order = $user->orders()->where('isPaid', false)->where('amount', 0)->latest()->first();
 
-        if ($order) {
-            $newQuantity = $request->quantity;
-            if ($newQuantity < 1) $newQuantity = 1;
-            $order->products()->wherePivot('product_type', $productType)->updateExistingPivot($productId, [
-                'quantity' => $newQuantity
-            ]);
+    public function updateCart(Request $request, $productId, $oldProductType)
+    {
+        $request->validate([
+            'product_type' => 'required|in:Frozen,Cooked',
+            'quantity' => 'required|integer|min:1'
+        ]);
+        
+         $user = User::find(Auth::id());
+        $order = $user->orders()->where('isPaid', false)->where('amount', 0)->latest()->first();
+        $newType = $request->product_type;
+        $quantity = $request->quantity;
+        $product = Product::find($productId);
+        $priceAtOrder = ($newType == 'Frozen') ? $product->price_frozen : $product->price_cooked;
+
+        if ($newType !== $oldProductType) {
+            // Cek apakah sudah ada pivot dengan product_id dan newType
+            $existingNewType = DB::table('order_products')
+                ->where('order_id', $order->id)
+                ->where('product_id', $productId)
+                ->where('product_type', $newType)
+                ->first();
+
+            if ($existingNewType) {
+                // Gabungkan quantity
+                DB::table('order_products')
+                    ->where('order_id', $order->id)
+                    ->where('product_id', $productId)
+                    ->where('product_type', $newType)
+                    ->update([
+                        'quantity' => $existingNewType->quantity + $quantity,
+                        'price_at_order' => $priceAtOrder,
+                        'updated_at' => now()
+                    ]);
+                
+                // Hapus pivot lama
+                DB::table('order_products')
+                    ->where('order_id', $order->id)
+                    ->where('product_id', $productId)
+                    ->where('product_type', $oldProductType)
+                    ->delete();
+            } else {
+                // Update tipe pivot lama
+                DB::table('order_products')
+                    ->where('order_id', $order->id)
+                    ->where('product_id', $productId)
+                    ->where('product_type', $oldProductType)
+                    ->update([
+                        'product_type' => $newType,
+                        'price_at_order' => $priceAtOrder,
+                        'quantity' => $quantity,
+                        'updated_at' => now()
+                    ]);
+            }
+        } else {
+            // Update quantity saja
+            DB::table('order_products')
+                ->where('order_id', $order->id)
+                ->where('product_id', $productId)
+                ->where('product_type', $newType)
+                ->update([
+                    'quantity' => $quantity,
+                    'price_at_order' => $priceAtOrder,
+                    'updated_at' => now()
+                ]);
         }
-        return response()->json(['success' => true]);
+
+        return redirect()->route('cart')->with('success', 'Cart item updated!');
     }
 
     public function removeFromCart($productId, $productType)
@@ -179,12 +232,9 @@ class OrderController extends Controller
             return ($product->pivot->product_type == 'Frozen' ? $product->price_frozen : $product->price_cooked) * $product->pivot->quantity;
         });
 
-        // Update amount (tandai bahwa order ini sudah di-checkout)
-        // Tetap unpaid, hanya set amount agar masuk history
         $order->amount = $amount;
         $order->save();
 
-        // Set flag agar cart kosong di tampilan
         return redirect()->route('cart')->with([
             'just_ordered' => true,
             'success' => 'Order placed! Check your history below.'
@@ -200,6 +250,6 @@ class OrderController extends Controller
             ->orderByDesc('created_at')
             ->paginate(5);
 
-        return view('order-history', compact('orderHistory'));
+        return view('order.order-history', compact('orderHistory'));
     }
 }

@@ -16,7 +16,7 @@
                 @endif
             </div>
             <div class="row justify-content-center">
-                @if ($products->count() === 0)
+                @if ($products->isEmpty())
                     <div class="row justify-content-center align-items-center" style="min-height:40vh;">
                         <div class="col-12 d-flex justify-content-center">
                             <div style="

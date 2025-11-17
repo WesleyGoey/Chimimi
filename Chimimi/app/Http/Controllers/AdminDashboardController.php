@@ -10,7 +10,7 @@ class AdminDashboardController extends Controller
     public function index()
     {
         $pendingOrdersCount = Order::where('isPaid', false)->count();
-        $ordersCount = Order::where('amount', '>', 0)->count();
+        $ordersCount = Order::where('isPaid', true)->count();
         $reviewsCount = Review::count(); 
         return view('admin.dashboard', compact('ordersCount', 'pendingOrdersCount', 'reviewsCount'));
     }

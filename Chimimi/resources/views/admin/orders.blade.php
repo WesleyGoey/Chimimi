@@ -9,7 +9,7 @@
       <div class="col-12 d-flex flex-column align-items-center">
         <span class="fw-bold"
             style="color:#fff;background:#ff6f61;padding:0.6em 2em;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.7rem;letter-spacing:1px;">
-            Admin Orders
+            Pending Orders
         </span>
       </div>
     </div>
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    @if ($orders->count() === 0)
+    @if ($orders->isEmpty())
                 <div class="row justify-content-center align-items-center" style="min-height:40vh;">
                     <div class="col-12 d-flex justify-content-center">
                         <div
@@ -39,7 +39,7 @@
                                 text-align:center;
                                 box-shadow:0 2px 12px rgba(255,111,97,0.10);
                             ">
-                            No orders available
+                            No pending orders available
                         </div>
                     </div>
                 </div>
@@ -54,9 +54,18 @@
                   <div class="text-muted">By: {{ $order->user->username ?? $order->user->email ?? '—' }}</div>
                   <div class="text-muted">Placed: {{ $order->created_at->format('Y-m-d H:i') }}</div>
                 </div>
-                <div class="text-end">
-                  <div class="fw-bold" style="color:#f17807;font-size:1.1rem;">Rp. {{ number_format($order->amount,0,',','.') }}</div>
-                  <div class="small text-{{ $order->isPaid ? 'success' : 'danger' }}">{{ $order->isPaid ? 'Paid' : 'Unpaid' }}</div>
+                <div class="text-end d-flex flex-column align-items-end" style="gap:0.5rem;">
+                  {{-- Jika belum paid, tampilkan tombol mark paid --}}
+                  @if (!$order->isPaid)
+                    <form method="POST" action="{{ route('admin.orders.pay', $order->id) }}" style="display:inline;">
+                      @csrf
+                      <button type="submit" class="btn btn-success fw-bold px-3 py-2" style="border-radius:12px;">
+                        <i class="bi bi-cash-stack me-1"></i> Mark Paid
+                      </button>
+                    </form>
+                  @else
+                    <span class="badge rounded-pill px-3 py-2 fw-bold" style="background:#28a745;color:#fff;">Paid</span>
+                  @endif
                 </div>
               </div>
 
@@ -79,6 +88,14 @@
                     @endforeach
                   </ul>
                 @endif
+              </div>
+
+              {{-- Total per order (moved below products) --}}
+              <div class="mt-3 mb-2 d-flex justify-content-between align-items-center">
+                <div class="small text-muted">Order Total</div>
+                <div class="fw-bold" style="color:#ff6f61;">
+                  Rp. {{ number_format($order->products->sum(function($p) { return $p->pivot->price_at_order * $p->pivot->quantity; }), 0, ',', '.') }}
+                </div>
               </div>
 
               @if ($order->notes)

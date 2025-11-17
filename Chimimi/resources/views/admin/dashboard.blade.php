@@ -32,12 +32,12 @@
                     <div class="card text-center shadow-sm h-100"
                         style="border-radius:18px;background:#fffbe6;border:2px solid #ff6f61;">
                         <div class="card-body py-5">
-                            <h5 class="card-title" style="color:#ff6f61;font-weight:700;">Total Orders</h5>
+                            <h5 class="card-title" style="color:#ff6f61;font-weight:700;">Paid Orders</h5>
                             <p class="display-6 fw-bold" style="color:#f17807;">{{ $ordersCount ?? 0 }}</p>
-                            <p class="text-muted">Number of order history</p>
+                            <p class="text-muted">Orders that have been paid</p>
                             <a href="{{ route('admin.orderHistory') }}"
                                 class="btn btn-outline-warning fw-bold mt-3 px-4 py-2" style="border-radius:18px;">View
-                                History</a>
+                                Paid History</a>
                         </div>
                     </div>
                 </div>

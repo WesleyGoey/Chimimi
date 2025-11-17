@@ -16,62 +16,56 @@
                     <div class="card shadow-lg p-3 p-md-4"
                         style="background:#fffbe6;border-radius:24px; border: 2.5px solid #ff6f61;">
                         @if (!$order || $order->products->isEmpty())
-                            <div class="row justify-content-center align-items-center" style="min-height:20vh;">
-                                <div class="col-12 d-flex justify-content-center">
-                                    <div style="
-                                        background:#fffbe6;
-                                        border-radius:18px;
-                                        color:#ff6f61;
-                                        font-size:2rem;
-                                        font-weight:700;
-                                        padding:2rem 0;
-                                        width:100%;
-                                        max-width:700px;
-                                        text-align:center;
-                                        box-shadow:0 2px 12px rgba(255,111,97,0.10);
-                                    ">
-                                        No carts available
-                                    </div>
-                                </div>
+                            <div class="text-center text-muted py-3" style="font-size:1.1rem;">
+                                No cart items found.
                             </div>
                         @else
                             <div class="mb-4 pt-4">
                                 @foreach ($order->products as $product)
-                                    <div class="d-flex align-items-center mb-3 p-3"
-                                        style="background:#fff;border-radius:18px;box-shadow:0 2px 8px rgba(255,111,97,0.07);">
-                                        <img src="{{ asset('storage/' . $product->image_path) }}"
-                                            alt="{{ $product->name }}"
-                                            style="width:90px;height:90px;object-fit:cover;border-radius:14px;border:2.5px solid #ffe066;box-shadow:0 2px 8px rgba(255,111,97,0.10);margin-right:18px;">
+                                    <div class="d-flex align-items-center mb-4 p-3"
+                                        style="background:#fff;border-radius:20px;box-shadow:0 2px 12px rgba(255,111,97,0.10);">
+                                        <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}"
+                                            style="width:100px;height:100px;object-fit:cover;border-radius:16px;border:3px solid #ffe066;box-shadow:0 2px 8px rgba(255,224,102,0.10);margin-right:22px;">
                                         <div class="flex-grow-1 ms-2">
-                                            <div class="fw-bold d-flex align-items-center mb-1"
-                                                style="font-size:1.15rem;color:#ff6f61;">
+                                            <div class="fw-bold d-flex align-items-center mb-2"
+                                                style="font-size:1.25rem;color:#ff6f61;">
                                                 {{ $product->name }}
                                                 @if ($product->pivot->product_type == 'Frozen')
-                                                    <span class="badge rounded-pill ms-2 px-3 py-2 fw-bold"
-                                                        style="background:#ffe066;color:#212529;font-size:1rem;box-shadow:0 2px 8px rgba(255,224,102,0.10);">
+                                                    <span class="badge rounded-pill ms-3 px-4 py-2 fw-bold"
+                                                        style="background:#ffe066;color:#212529;font-size:1.05rem;box-shadow:0 2px 8px rgba(255,224,102,0.10);">
                                                         Frozen
                                                     </span>
                                                 @else
-                                                    <span class="badge rounded-pill ms-2 px-3 py-2 fw-bold"
-                                                        style="background:#ff6f61;color:#fff;font-size:1rem;box-shadow:0 2px 8px rgba(255,111,97,0.10);">
+                                                    <span class="badge rounded-pill ms-3 px-4 py-2 fw-bold"
+                                                        style="background:#ff6f61;color:#fff;font-size:1.05rem;box-shadow:0 2px 8px rgba(255,111,97,0.10);">
                                                         Cooked
                                                     </span>
                                                 @endif
                                             </div>
-                                            <div class="mb-1" style="color:#f17807;font-size:1.05rem;">
-                                                Price: <span style="color:#f17807;">
-                                                    Rp. {{ number_format(
+                                            <div class="mb-1" style="color:#f17807;font-size:1.1rem;">
+                                                Price: <span class="fw-bold" style="color:#f17807;">
+                                                    Rp.
+                                                    {{ number_format(
                                                         $product->pivot->product_type == 'Frozen' ? $product->price_frozen : $product->price_cooked,
-                                                        0, ',', '.'
+                                                        0,
+                                                        ',',
+                                                        '.',
                                                     ) }}
                                                 </span>
                                             </div>
-                                            <div style="color:#f17807;font-size:1rem;">
-                                                Quantity: <span>{{ $product->pivot->quantity }}</span>
+                                            <div style="font-size:1.08rem;">
+                                                Quantity: <span class="fw-bold"
+                                                    style="color:#ff6f61;">{{ $product->pivot->quantity }}</span>
                                             </div>
                                         </div>
-                                        <div class="ms-auto">
-                                            <form method="POST" action="{{ route('cart.remove', [$product->id, $product->pivot->product_type]) }}">
+                                        <div class="ms-auto d-flex align-items-center gap-2">
+                                            <a href="{{ route('cart.edit', [$product->id, $product->pivot->product_type]) }}"
+                                                class="btn btn-outline-warning p-2 d-flex align-items-center justify-content-center"
+                                                style="border-radius:50%;width:45px;height:45px;font-size:1.2rem;">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <form method="POST"
+                                                action="{{ route('cart.remove', [$product->id, $product->pivot->product_type]) }}">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
@@ -109,6 +103,13 @@
                                 </div>
                             </div>
                         @endif
+                    </div>
+                    <div class="d-flex justify-content-center mt-4 mb-5">
+                        <a href="{{ route('order.history') }}" class="btn fw-bold px-4 py-2"
+                            style="background:#fffbe6;color:#ff6f61;border-radius:28px;box-shadow:0 2px 8px rgba(255,111,97,0.10);font-size:1.1rem;border:2px solid #ff6f61;">
+                            <i class="bi bi-clock-history me-2"></i>
+                            View Order History
+                        </a>
                     </div>
                 </div>
             </div>
