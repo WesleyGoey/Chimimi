@@ -39,7 +39,7 @@
                     @foreach ($products as $product)
                         <div class="col-md-4 mb-4">
                             <div class="card h-100 shadow-sm border-0"
-                                style="background:#fffbe6;border-radius:18px;transition:transform .2s;">
+                                style="background:#fffbe6;border-radius:18px;">
                                 <img src="{{ asset('storage/' . $product->image_path) }}" class="card-img-top" alt="{{ $product->name }}"
                                     style="height:220px; object-fit:cover; border-radius:18px 18px 0 0;">
                                 <div class="card-body text-center d-flex flex-column">
@@ -57,16 +57,11 @@
                                     </div>
                                     <div class="d-flex justify-content-center w-100">
                                         @auth
-                                            <form method="POST" action="{{ route('cart.add') }}" class="w-100 d-flex justify-content-center">
-                                                @csrf
-                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                <input type="hidden" name="quantity" value="1">
-                                                <input type="hidden" name="product_type" value="Frozen">
-                                                <button type="submit" class="btn btn-lg px-4 py-2 w-75"
-                                                    style="background:#ff6f61;color:#fff;font-weight:600;border-radius:24px;box-shadow:0 2px 12px rgba(255,111,97,0.10);transition:background .2s;">
-                                                    <i class="bi bi-cart-plus me-2"></i> Add to Cart
-                                                </button>
-                                            </form>
+                                            <a href="{{ route('cart.select', $product->id) }}"
+                                                class="btn btn-lg px-4 py-2 w-75 d-flex justify-content-center align-items-center"
+                                                style="background:#ff6f61;color:#fff;font-weight:600;border-radius:24px;box-shadow:0 2px 12px rgba(255,111,97,0.10);transition:background .2s;">
+                                                <i class="bi bi-cart-plus me-2"></i> Add to Cart
+                                            </a>
                                         @else
                                             <a href="{{ route('login') }}" class="btn btn-lg px-4 py-2 w-75 d-flex justify-content-center align-items-center"
                                                 style="background:#ff6f61;color:#fff;font-weight:600;border-radius:24px;box-shadow:0 2px 12px rgba(255,111,97,0.10);transition:background .2s;">

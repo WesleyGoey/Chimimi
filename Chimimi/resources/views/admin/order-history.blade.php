@@ -1,6 +1,7 @@
+{{-- filepath: Chimimi/resources/views/admin/order-history.blade.php --}}
 @extends('layout.mainlayout')
 
-@section('title', 'Admin Orders')
+@section('title', 'Admin Order History')
 
 @section('content')
 <section style="background: linear-gradient(135deg, #ffe066 0%, #ff6f61 100%); padding:4rem 0; min-height:100vh;">
@@ -9,41 +10,20 @@
       <div class="col-12 d-flex flex-column align-items-center">
         <span class="fw-bold"
             style="color:#fff;background:#ff6f61;padding:0.6em 2em;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.7rem;letter-spacing:1px;">
-            Admin Orders
+            Paid Order History
         </span>
       </div>
     </div>
-
-    <div class="row mb-4">
-      <div class="col-12 d-flex justify-content-end">
-        <a href="{{ route('admin.orderHistory') }}" class="btn btn-warning fw-bold px-4 py-2"
-           style="border-radius:18px;box-shadow:0 2px 8px rgba(255,111,97,0.10);font-size:1.1rem;">
-           <i class="bi bi-clock-history me-2"></i> View Order History
-        </a>
-      </div>
-    </div>
-
     @if ($orders->count() === 0)
-                <div class="row justify-content-center align-items-center" style="min-height:40vh;">
-                    <div class="col-12 d-flex justify-content-center">
-                        <div
-                            style="
-                                background:#fffbe6;
-                                border-radius:18px;
-                                color:#ff6f61;
-                                font-size:2rem;
-                                font-weight:700;
-                                padding:2rem 0;
-                                width:100%;
-                                max-width:700px;
-                                text-align:center;
-                                box-shadow:0 2px 12px rgba(255,111,97,0.10);
-                            ">
-                            No orders available
-                        </div>
-                    </div>
-                </div>
-            @else
+      <div class="row justify-content-center align-items-center" style="min-height:40vh;">
+        <div class="col-12 d-flex justify-content-center">
+          <div
+            style="background:#fffbe6;border-radius:18px;color:#ff6f61;font-size:2rem;font-weight:700;padding:2rem 0;width:100%;max-width:700px;text-align:center;box-shadow:0 2px 12px rgba(255,111,97,0.10);">
+            No paid orders found
+          </div>
+        </div>
+      </div>
+    @else
       <div class="row">
         @foreach ($orders as $order)
           <div class="col-12 mb-4">
@@ -56,12 +36,10 @@
                 </div>
                 <div class="text-end">
                   <div class="fw-bold" style="color:#f17807;font-size:1.1rem;">Rp. {{ number_format($order->amount,0,',','.') }}</div>
-                  <div class="small text-{{ $order->isPaid ? 'success' : 'danger' }}">{{ $order->isPaid ? 'Paid' : 'Unpaid' }}</div>
+                  <div class="small text-success">Paid</div>
                 </div>
               </div>
-
               <hr>
-
               <div>
                 <h6 class="mb-2 fw-bold" style="color:#ff6f61;">Items</h6>
                 @if ($order->products->isEmpty())
@@ -80,14 +58,12 @@
                   </ul>
                 @endif
               </div>
-
-              @if ($order->notes)
-                <hr>
-                <div><strong>Notes:</strong> {{ $order->notes }}</div>
-              @endif
             </div>
           </div>
         @endforeach
+      </div>
+      <div class="d-flex justify-content-center mt-4">
+        {{ $orders->links() }}
       </div>
     @endif
   </div>
