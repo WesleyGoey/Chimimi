@@ -7,13 +7,21 @@
 
     <div class="position-relative"
         style="background: url('{{ asset('images/all_risoles.jpeg') }}') center/cover no-repeat; min-height: 100vh; height: 100vh; border-radius: 0;">
-        <div class="position-absolute top-50 start-50 translate-middle text-center text-white"
-            style="background: #fffbe6; border-radius:48px; box-shadow: 0 4px 32px rgba(0,0,0,0.12); padding:2.2rem 3.2rem; border: 2px solid #ff6f61; display:inline-block;">
-            <h1 class="display-4 fw-bold mb-3" style="color:#ff6f61;text-shadow:0 2px 12px rgba(255,224,102,0.18);">Discover
-                the Joy of
-                Risoles!</h1>
-            <p class="lead mb-0" style="color:#ff6f61;text-shadow:0 2px 12px rgba(255,111,97,0.12);font-weight:500;">Indulge
-                in crispy, golden bites filled with irresistible flavors. Elevate your snacking experience with Chimimi!</p>
+       <div class="position-absolute start-50" 
+             style="top:12%; left:50%; transform: translateX(-50%); z-index:3; display:flex; flex-direction:column; align-items:center; gap:0.6rem; width:auto;">
+          <span style="background:#fff;border-radius:50%;padding:8px;display:inline-block;box-shadow:0 10px 36px rgba(0,0,0,0.16);">
+             <img src="{{ asset('images/logo.png') }}" alt="Chimimi Logo"
+                 style="height:200px;width:200px;object-fit:contain;display:block;max-width:calc(92vw);">
+          </span>
+
+            <div class="text-center text-white"
+                 style="background: #fffbe6; border-radius:48px; box-shadow: 0 4px 32px rgba(0,0,0,0.12); padding:2.2rem 3.2rem; border: 2px solid #ff6f61; display:inline-block; width: min(900px, 90%);">
+                <h1 class="display-4 fw-bold mb-3" style="color:#ff6f61;text-shadow:0 2px 12px rgba(255,224,102,0.18);">Discover
+                    the Joy of
+                    Risoles!</h1>
+                <p class="lead mb-0" style="color:#ff6f61;text-shadow:0 2px 12px rgba(255,111,97,0.12);font-weight:500;">Indulge
+                    in crispy, golden bites filled with irresistible flavors. Elevate your snacking experience with Chimimi!</p>
+            </div>
         </div>
     </div>
 
@@ -36,39 +44,6 @@
                             Crispy outside, flavorful inside — handcrafted risoles made fresh daily. Choose your style:
                             savory or sweet, perfect for sharing.
                         </p>
-
-                        <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
-                            <div class="d-flex align-items-center me-2">
-                                <span class="badge rounded-pill px-3 py-2"
-                                    style="background:#fff4ee;color:#ff6f61;font-weight:600;">Savory</span>
-                                <span class="badge rounded-pill px-3 py-2 ms-2"
-                                    style="background:#fff7fb;color:#ff6f61;font-weight:600;">Sweet</span>
-                            </div>
-
-                            <div class="ms-auto d-flex align-items-center gap-2">
-                                <div class="text-muted" style="font-size:0.95rem;color:#6b6b6b;">1 pax /</div>
-                                <span class="badge rounded-pill px-3 py-2"
-                                    style="background:#fff7e6;color:#f17807;font-weight:700;">5 pcs</span>
-                            </div>
-                        </div>
-
-                        <div class="row g-3 mb-4">
-                            <div class="col-6 col-md-6">
-                                <div class="p-3"
-                                    style="background:#fff9f4;border-radius:12px;border:1px solid #ffe6c9;">
-                                    <div style="font-size:0.85rem;color:#6b6b6b;">Frozen</div>
-                                    <div class="fw-bold" style="color:#ff6f61;font-size:1.1rem;">Rp50.000</div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-6">
-                                <div class="p-3"
-                                    style="background:#fffafc;border-radius:12px;border:1px solid #ffe6f0;">
-                                    <div style="font-size:0.85rem;color:#6b6b6b;">Cooked</div>
-                                    <div class="fw-bold" style="color:#ff6f61;font-size:1.1rem;">Rp55.000</div>
-                                </div>
-                            </div>
-                        </div>
-
                         <p class="text-muted mb-4" style="font-size:0.95rem;">
                             Made with premium ingredients and a touch of love — perfect as a snack or party bites. Try our most-loved flavors below.
                         </p>
@@ -89,36 +64,7 @@
 
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-                    <div
-                        style="background:#fffbe6; border:2.5px solid #ff6f61; border-radius:32px; box-shadow:0 4px 24px rgba(0,0,0,0.08); padding:2.5rem 2rem;">
-                        <h2 class="text-center mb-4" style="font-weight:700;color:#ff6f61;letter-spacing:1px;">Most Loved
-                            Risoles</h2>
-                        <p class="text-center mb-5" style="color:#ff6f61;font-size:1.15rem;font-weight:500;">Our customers’
-                            favorites, chosen for their irresistible taste and crispy perfection. Try one and find your new
-                            obsession!</p>
-                        <div class="row justify-content-center">
-                            @foreach ($bestSellers as $product)
-                                <div class="col-md-4 mb-4">
-                                    <div class="card h-100 shadow-sm border-0"
-                                        style="background:#fff;border-radius:18px;transition:transform .2s;">
-                                        <img src="{{ asset($product->image_path) }}" class="card-img-top"
-                                            alt="{{ $product->name }}"
-                                            style="height:220px; object-fit:cover; border-radius:18px 18px 0 0;">
-                                        <div class="card-body text-center d-flex flex-column">
-                                            <h5 class="card-title mb-2" style="color:#ff6f61;font-weight:600;">
-                                                {{ $product->name }}</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="d-flex justify-content-center mt-4">
-                            <a href="{{ route('products') }}" class="btn btn-lg btn-warning px-5 py-3"
-                                style="font-weight:600;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);">View
-                                All
-                                Menu</a>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
