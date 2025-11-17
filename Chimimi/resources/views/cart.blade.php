@@ -58,6 +58,17 @@
                                                     style="color:#ff6f61;">{{ $product->pivot->quantity }}</span>
                                             </div>
                                         </div>
+
+                                       {{-- Subtotal per product --}}
+                                       <div class="text-end me-3" style="min-width:120px;">
+                                           @php
+                                               $unit = $product->pivot->product_type == 'Frozen' ? $product->price_frozen : $product->price_cooked;
+                                               $subtotal = $unit * $product->pivot->quantity;
+                                           @endphp
+                                           <div class="small text-muted">Subtotal</div>
+                                           <div class="fw-bold" style="color:#ff6f61;">Rp. {{ number_format($subtotal, 0, ',', '.') }}</div>
+                                       </div>
+
                                         <div class="ms-auto d-flex align-items-center gap-2">
                                             <a href="{{ route('cart.edit', [$product->id, $product->pivot->product_type]) }}"
                                                 class="btn btn-outline-warning p-2 d-flex align-items-center justify-content-center"
@@ -97,7 +108,7 @@
                                         <div class="mb-3">
                                             <label class="form-label fw-bold" style="color:#f17807;">Notes (optional)</label>
                                             <textarea name="notes" class="form-control" rows="3"
-                                                placeholder="Add delivery notes or special instructions..."
+                                                placeholder="Add order notes or special instructions..."
                                                 style="border-radius:12px;border:2px solid #ffe066;background:#fff;padding:0.8rem;resize:vertical;"></textarea>
                                         </div>
                                         <div class="d-flex justify-content-center mt-2">

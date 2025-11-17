@@ -8,10 +8,10 @@ class AdminOrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::with(['user', 'products'])
+        $orders = Order::with('products')
             ->where('isPaid', false)
-            ->orderByDesc('created_at')
-            ->paginate(10);
+            ->orderBy('created_at', 'asc')
+            ->paginate(5);
 
         return view('admin.orders', compact('orders'));
     }
@@ -21,7 +21,7 @@ class AdminOrderController extends Controller
         $orders = Order::with(['user', 'products'])
             ->where('isPaid', true)
             ->orderByDesc('created_at')
-            ->paginate(10);
+            ->paginate(5);
 
         return view('admin.order-history', compact('orders'));
     }

@@ -12,8 +12,11 @@ use App\Models\User;
 class OrderController extends Controller
 {
     public function index()
-    {
-        $orders = Order::with('products')->get();
+    {   
+        $orders = Order::with('products')
+            ->orderByDesc('created_at')
+            ->paginate(5);
+
         return view('orders.index', compact('orders'));
     }
 
