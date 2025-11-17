@@ -12,33 +12,33 @@ class OrderSeeder extends Seeder
      */
     public function run(): void
     {
-        $orders = \App\Models\Order::factory(100)->create(['amount' => 0]);
+        // $orders = \App\Models\Order::factory(100)->create(['amount' => 0]);
 
-        $products = \App\Models\Product::all();
-        $faker = \Faker\Factory::create();
+        // $products = \App\Models\Product::all();
+        // $faker = \Faker\Factory::create();
 
-        // Antisipasi jika tidak ada produk
-        if ($products->isEmpty()) {
-            return;
-        }
+        // // Antisipasi jika tidak ada produk
+        // if ($products->isEmpty()) {
+        //     return;
+        // }
 
-        foreach ($orders as $order) {
-            $totalAmount = 0;
-            $selectedProducts = $products->random(rand(1, 6));
-            foreach ($selectedProducts as $product) {
-                $productType = $faker->randomElement(['Frozen', 'Cooked']);
-                $priceAtOrder = ($productType == 'Frozen') ? $product->price_frozen : $product->price_cooked;
-                $quantity = rand(1, 5);
+        // foreach ($orders as $order) {
+        //     $totalAmount = 0;
+        //     $selectedProducts = $products->random(rand(1, 6));
+        //     foreach ($selectedProducts as $product) {
+        //         $productType = $faker->randomElement(['Frozen', 'Cooked']);
+        //         $priceAtOrder = ($productType == 'Frozen') ? $product->price_frozen : $product->price_cooked;
+        //         $quantity = rand(1, 5);
 
-                $order->products()->attach($product->id, [
-                    'product_type' => $productType,
-                    'price_at_order' => $priceAtOrder,
-                    'quantity' => $quantity,
-                ]);
-                $totalAmount += $priceAtOrder * $quantity;
-            }
-            $order->amount = $totalAmount;
-            $order->save();
-        }
+        //         $order->products()->attach($product->id, [
+        //             'product_type' => $productType,
+        //             'price_at_order' => $priceAtOrder,
+        //             'quantity' => $quantity,
+        //         ]);
+        //         $totalAmount += $priceAtOrder * $quantity;
+        //     }
+        //     $order->amount = $totalAmount;
+        //     $order->save();
+        // }
     }
 }

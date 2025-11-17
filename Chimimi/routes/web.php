@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cart', [OrderController::class, 'cart'])->name('cart');
     Route::post('/cart/add', [OrderController::class, 'addToCart'])->name('cart.add');
+    Route::delete('/cart/remove/{product}', [OrderController::class, 'removeFromCart'])->name('cart.remove');
+    Route::post('/order/checkout', [OrderController::class, 'checkout'])->name('order.checkout');
 
     Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
     Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
