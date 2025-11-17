@@ -29,11 +29,13 @@ Route::middleware('auth')->group(function () {
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
 
-    Route::get('/cart', [OrderController::class, 'cart'])->name('cart');
+    Route::get('/cart/select/{product}', [OrderController::class, 'selectProduct'])->name('cart.select');
     Route::post('/cart/add', [OrderController::class, 'addToCart'])->name('cart.add');
+    Route::get('/cart', [OrderController::class, 'cart'])->name('cart');
+    Route::delete('/cart/remove/{product}/{product_type}', [OrderController::class, 'removeFromCart'])->name('cart.remove');
     Route::delete('/cart/remove/{product}', [OrderController::class, 'removeFromCart'])->name('cart.remove');
     Route::post('/order/checkout', [OrderController::class, 'checkout'])->name('order.checkout');
-
+    
     Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
     Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
     Route::put('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
@@ -51,6 +53,7 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::delete('/products/{product}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
 
     Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders');
+    Route::get('/order-history', [OrderController::class, 'history'])->name('order.history');
     
     Route::get('/reviews', [AdminReviewController::class, 'index'])->name('admin.reviews');
      Route::delete('/reviews/{review}', [AdminReviewController::class, 'destroy'])->name('admin.reviews.destroy');
