@@ -92,13 +92,21 @@
                                     </span>
                                 </div>
                                 <div class="d-flex justify-content-center mt-4">
-                                    <form method="POST" action="{{ route('order.checkout') }}">
+                                    <form method="POST" action="{{ route('order.checkout') }}" style="width:100%;max-width:680px;">
                                         @csrf
-                                        <button type="submit" class="btn btn-lg px-5 py-2 fw-bold"
-                                            style="background:#ff6f61;color:#fff;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.15rem;">
-                                            <i class="bi bi-bag-fill" style="font-size:1.3rem; margin-right:0.5rem;"></i>
-                                            Order Now
-                                        </button>
+                                        <div class="mb-3">
+                                            <label class="form-label fw-bold" style="color:#f17807;">Notes (optional)</label>
+                                            <textarea name="notes" class="form-control" rows="3"
+                                                placeholder="Add delivery notes or special instructions..."
+                                                style="border-radius:12px;border:2px solid #ffe066;background:#fff;padding:0.8rem;resize:vertical;"></textarea>
+                                        </div>
+                                        <div class="d-flex justify-content-center mt-2">
+                                            <button type="submit" class="btn btn-lg px-5 py-2 fw-bold"
+                                                style="background:#ff6f61;color:#fff;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.15rem;">
+                                                <i class="bi bi-bag-fill" style="font-size:1.3rem; margin-right:0.5rem;"></i>
+                                                Order Now
+                                            </button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

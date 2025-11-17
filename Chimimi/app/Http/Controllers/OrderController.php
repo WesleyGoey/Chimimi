@@ -232,6 +232,11 @@ class OrderController extends Controller
             return ($product->pivot->product_type == 'Frozen' ? $product->price_frozen : $product->price_cooked) * $product->pivot->quantity;
         });
 
+        $notes = $request->input('notes');
+        if ($notes !== null) {
+            $order->notes = trim($notes) === '' ? null : $notes;
+        }
+        
         $order->amount = $amount;
         $order->save();
 

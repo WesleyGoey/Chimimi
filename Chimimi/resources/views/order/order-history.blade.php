@@ -46,6 +46,15 @@
                                                 </li>
                                             @endforeach
                                         </ul>
+
+                                        @if (!empty($history->notes))
+                                            <hr style="margin:12px 0;border-top:1px dashed rgba(0,0,0,0.06)">
+                                            <div class="mt-2">
+                                                <strong>Notes:</strong>
+                                                <div class="text-muted" style="white-space:pre-wrap;">{{ $history->notes }}</div>
+                                            </div>
+                                        @endif
+
                                         <div class="small text-muted mt-2">Order Date:
                                             {{ $history->created_at->format('Y-m-d H:i') }}</div>
                                     </div>
