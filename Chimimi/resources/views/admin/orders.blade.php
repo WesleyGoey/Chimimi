@@ -22,6 +22,7 @@
         </a>
       </div>
     </div>
+    
     @if ($orders->isEmpty())
                 <div class="row justify-content-center align-items-center" style="min-height:40vh;">
                     <div class="col-12 d-flex justify-content-center">
