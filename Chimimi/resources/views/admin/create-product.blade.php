@@ -25,11 +25,17 @@
                             <textarea name="ingredients" id="ingredients" class="form-control" rows="2" required style="border-radius:16px;" placeholder="e.g. Smoked Beef, Mayonnaise, Egg, Cheese"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="price_frozen" class="form-label fw-bold" style="color:#ff6f61;">Price Frozen</label>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <label for="price_frozen" class="form-label fw-bold" style="color:#ff6f61;">Price Frozen</label>
+                                <div class="small text-muted">1 pax = 5 pcs</div>
+                            </div>
                             <input type="number" name="price_frozen" id="price_frozen" class="form-control" required min="0" step="1000" style="border-radius:16px;" placeholder="e.g. 50000">
                         </div>
                         <div class="mb-3">
-                            <label for="price_cooked" class="form-label fw-bold" style="color:#ff6f61;">Price Cooked</label>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <label for="price_cooked" class="form-label fw-bold" style="color:#ff6f61;">Price Cooked</label>
+                                <div class="small text-muted">1 pax = 5 pcs</div>
+                            </div>
                             <input type="number" name="price_cooked" id="price_cooked" class="form-control" required min="0" step="1000" style="border-radius:16px;" placeholder="e.g. 55000">
                         </div>
                         <div class="mb-3">
