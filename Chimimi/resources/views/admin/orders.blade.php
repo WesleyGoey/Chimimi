@@ -55,7 +55,6 @@
                   <div class="text-muted">Placed: {{ $order->created_at->format('Y-m-d H:i') }}</div>
                 </div>
                 <div class="text-end d-flex flex-column align-items-end" style="gap:0.5rem;">
-                  {{-- Jika belum paid, tampilkan tombol mark paid --}}
                   @if (!$order->isPaid)
                     <form method="POST" action="{{ route('admin.orders.pay', $order->id) }}" style="display:inline;">
                       @csrf
@@ -89,8 +88,6 @@
                   </ul>
                 @endif
               </div>
-
-              {{-- Total per order (moved below products) --}}
               <div class="mt-3 mb-2 d-flex justify-content-between align-items-center">
                 <div class="small text-muted">Order Total</div>
                 <div class="fw-bold" style="color:#ff6f61;">
@@ -106,7 +103,6 @@
           </div>
         @endforeach
 
-        {{-- Pagination: safe render menggunakan elements() --}}
         @if ($orders->lastPage() > 1)
             <div class="d-flex justify-content-center mt-4">
                 <nav>

@@ -59,7 +59,6 @@
                                             </div>
                                         </div>
 
-                                       {{-- Subtotal per product --}}
                                        <div class="text-end me-3" style="min-width:120px;">
                                            @php
                                                $unit = $product->pivot->product_type == 'Frozen' ? $product->price_frozen : $product->price_cooked;

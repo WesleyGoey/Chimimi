@@ -22,7 +22,6 @@
                         <form method="POST" action="/register">
                             @csrf
 
-                            <!-- Username -->
                             <div class="mb-4">
                                 <label for="username" class="form-label fw-bold" style="color:#ff6f61;">Username</label>
                                 <input id="username" class="form-control shadow-sm" type="text" name="username" value="{{ old('username') }}" required autofocus
@@ -32,7 +31,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Email Address -->
                             <div class="mb-4">
                                 <label for="email" class="form-label fw-bold" style="color:#ff6f61;">Email</label>
                                 <input id="email" class="form-control shadow-sm" type="email" name="email" value="{{ old('email') }}" required autocomplete="username"
@@ -42,7 +40,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Phone -->
                             <div class="mb-4">
                                 <label for="phone" class="form-label fw-bold" style="color:#ff6f61;">Phone</label>
                                 <input id="phone" class="form-control shadow-sm" type="text" name="phone" value="{{ old('phone') }}" required
@@ -52,7 +49,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Password -->
                             <div class="mb-4">
                                 <label for="password" class="form-label fw-bold" style="color:#ff6f61;">Password</label>
                                 <input id="password" class="form-control shadow-sm" type="password" name="password" required autocomplete="new-password"
@@ -62,7 +58,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Confirm Password -->
                             <div class="mb-4">
                                 <label for="password_confirmation" class="form-label fw-bold" style="color:#ff6f61;">Confirm Password</label>
                                 <input id="password_confirmation" class="form-control shadow-sm" type="password" name="password_confirmation" required autocomplete="new-password"

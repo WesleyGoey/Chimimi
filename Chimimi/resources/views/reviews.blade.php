@@ -63,7 +63,7 @@
                 </span>
             </div>
             <div class="row justify-content-center">
-                @if ($reviews->count() === 0)
+                @if ($reviews->isEmpty())
                     <div class="row justify-content-center align-items-center" style="min-height:20vh;">
                         <div class="col-12 d-flex justify-content-center">
                             <div style="
