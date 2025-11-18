@@ -8,9 +8,18 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::orderBy('id', 'asc')->paginate(3);
+        if ($request->has('search')) {
+            $products = Product::where('name', 'like', '%' . $request->search . '%')
+                ->orWhere('category', 'like', '%' . $request->search . '%')
+                ->orWhere('ingredients', 'like', '%' . $request->search . '%')
+                ->paginate(3)
+                ->withQueryString();
+        } else {
+            $products = Product::orderBy('id', 'asc')->paginate(3);
+        }
+
         return view('admin.products', compact('products'));
     }
 
@@ -75,8 +84,8 @@ class AdminProductController extends Controller
 
         return redirect()->route('admin.products')->with('success', 'Product updated!');
     }
-    
-     public function destroy(Product $product)
+
+    public function destroy(Product $product)
     {
         $product->delete();
         return redirect()->route('admin.products')->with('success', 'Product deleted!');

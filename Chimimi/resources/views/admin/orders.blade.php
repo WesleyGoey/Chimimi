@@ -16,13 +16,13 @@
 
     <div class="row mb-4">
       <div class="col-12 d-flex justify-content-end">
-        <a href="{{ route('admin.orderHistory') }}" class="btn btn-warning fw-bold px-4 py-2"
-           style="border-radius:18px;box-shadow:0 2px 8px rgba(255,111,97,0.10);font-size:1.1rem;">
+        <a href="{{ route('admin.orderHistory') }}" class="btn btn-warning fw-bold px-4 py-2 text-decoration-none"
+           style="border-radius:18px;box-shadow:0 2px 8px rgba(255,111,97,0.10);font-size:1.1rem;text-decoration:none;">
            <i class="bi bi-clock-history me-2"></i> View Order History
         </a>
       </div>
     </div>
-
+   
     @if ($orders->isEmpty())
                 <div class="row justify-content-center align-items-center" style="min-height:40vh;">
                     <div class="col-12 d-flex justify-content-center">

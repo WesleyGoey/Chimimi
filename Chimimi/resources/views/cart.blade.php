@@ -124,7 +124,7 @@
                     </div>
                     <div class="d-flex justify-content-center mt-4 mb-5">
                         <a href="{{ route('order.history') }}" class="btn fw-bold px-4 py-2"
-                            style="background:#fffbe6;color:#ff6f61;border-radius:28px;box-shadow:0 2px 8px rgba(255,111,97,0.10);font-size:1.1rem;border:2px solid #ff6f61;">
+                            style="background:#ff6f61;color:#fffbe6;border-radius:28px;box-shadow:0 2px 8px rgba(255,111,97,0.10);font-size:1.1rem;">
                             <i class="bi bi-clock-history me-2"></i>
                             View Order History
                         </a>
