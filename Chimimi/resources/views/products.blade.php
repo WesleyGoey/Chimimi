@@ -15,6 +15,24 @@
                     <span class="badge text-white mt-3" style="font-size:1.05rem;border-radius:16px;background:#f17807;min-width:120px;">1 pax / 5pcs</span>
                 @endif
             </div>
+
+            <div class="row mb-4">
+              <div class="col-12 d-flex justify-content-center">
+                <form method="GET" action="{{ route('products') }}" class="d-flex align-items-center"
+                      style="gap:0.75rem;width:100%;max-width:920px;">
+                  <div style="flex:1;min-width:260px;">
+                    <input type="search" name="search" value="{{ request('search') }}" class="form-control"
+                           placeholder="Search products by name, category, or ingredients..."
+                           style="border-radius:20px;border:2px solid #ffe066;padding:0.6rem 0.9rem;box-shadow:0 4px 18px rgba(0,0,0,0.03);">
+                  </div>
+                  <button type="submit" class="btn"
+                          style="background:#ffd400;color:#212529;border-radius:18px;font-weight:700;padding:.5rem 1rem;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+                    <i class="bi bi-search me-1"></i> Search
+                  </button>
+                </form>
+              </div>
+            </div>
+            
             <div class="row justify-content-center">
                 @if ($products->isEmpty())
                     <div class="row justify-content-center align-items-center" style="min-height:40vh;">
@@ -37,7 +55,7 @@
                     </div>
                 @else
                     @foreach ($products as $product)
-                        <div class="col-md-4 mb-4">
+                        <div class="col-md-4 mt-4 mb-4">
                             <div class="card h-100 shadow-sm border-0"
                                 style="background:#fffbe6;border-radius:18px;">
                                 <img src="{{ asset('storage/' . $product->image_path) }}" class="card-img-top" alt="{{ $product->name }}"

@@ -11,25 +11,31 @@
                         style="color:#fff;background:#ff6f61;padding:0.6em 2em;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.7rem;letter-spacing:1px;">
                         Admin Products
                     </span>
+                    <span class="badge text-white mt-3" style="font-size:1.05rem;border-radius:16px;background:#f17807;min-width:120px;">1 pax / 5pcs</span>
                 </div>
-                <div class="row mt-4">
-                    <div class="col-12 d-flex justify-content-center">
-                        <form method="GET" action="{{ route('admin.products') }}" class="d-flex align-items-center"
-                            style="gap:0.75rem;width:100%;max-width:820px;">
-                            <div style="flex:1;min-width:260px;">
-                                <input type="search" name="search" value="{{ request('search') }}" class="form-control"
-                                    placeholder="Search products by name, category, or ingredients..."
-                                    style="border-radius:20px;border:2px solid #ffe066;padding:0.6rem 0.9rem;">
-                            </div>
-                            <button type="submit" class="btn btn-warning fw-bold px-3 py-2" style="border-radius:18px;">
-                                <i class="bi bi-search me-1"></i> Search
-                            </button>
-                        </form>
-                    </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-12 d-flex justify-content-center">
+                    <form method="GET" action="{{ route('admin.products') }}" class="d-flex align-items-center"
+                        style="gap:0.75rem;width:100%;max-width:920px;">
+                        <div style="flex:1;min-width:260px;">
+                            <input type="search" name="search" value="{{ request('search') }}" class="form-control"
+                                placeholder="Search products by name, category, or ingredients..."
+                                style="border-radius:20px;border:2px solid #ffe066;padding:0.6rem 0.9rem;box-shadow:0 4px 18px rgba(0,0,0,0.03);">
+                        </div>
+                        <button type="submit" class="btn"
+                            style="background:#ffd400;color:#212529;border-radius:18px;font-weight:700;padding:.5rem 1rem;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+                            <i class="bi bi-search me-1"></i> Search
+                        </button>
+                    </form>
                 </div>
-                <div class="col-12 d-flex justify-content-end mt-3">
+            </div>
+            
+            <div class="row mb-4">
+                <div class="col-12 d-flex justify-content-end">
                     <a href="{{ route('admin.products.create') }}" class="btn btn-warning fw-bold px-4 py-2"
-                        style="border-radius:18px;">
+                        style="border-radius:18px;box-shadow:0 2px 8px rgba(255,111,97,0.12);">
                         + Add Product
                     </a>
                 </div>
