@@ -13,11 +13,6 @@
                     <div class="mb-4">
                         @include('profile.partials.update-profile-information-form')
                     </div>
-                    <hr style="border-top:2px solid #ffe066;">
-                    <h3 class="fw-bold mt-4 mb-3 text-center" style="color:#f17807; font-size:1.3rem;">Change Password</h3>
-                    <div>
-                        @include('profile.partials.update-password-form')
-                    </div>
                 </div>
             </div>
         </div>

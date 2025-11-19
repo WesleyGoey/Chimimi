@@ -24,6 +24,6 @@ class PasswordController extends Controller
             'password' => \Illuminate\Support\Facades\Hash::make($validated['password']),
         ]);
 
-        return redirect()->route('user')->with('status', 'password-updated');
+        return redirect()->route('profile.edit')->with('status', 'password-updated');
     }
 }

@@ -29,7 +29,13 @@
                 <div class="text-danger mt-1">{{ $message }}</div>
             @enderror
         </div>
-        <div class="d-flex justify-content-center mt-4">
+        <div class="text-center mb-3">
+            <a href="{{ route('password.change') }}" class="fw-bold"
+               style="color:#f17807;text-decoration:underline;font-size:1rem;">
+                Change Password
+            </a>
+        </div>
+        <div class="d-flex justify-content-center mt-2">
             <button type="submit" class="btn px-5 py-2"
                 style="background:#ff6f61;color:#fff;font-weight:700;border-radius:24px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.1rem;">
                 Save Changes
