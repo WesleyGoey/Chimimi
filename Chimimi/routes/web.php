@@ -12,22 +12,17 @@ use App\Http\Controllers\AdminReviewController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminOrderController;
 
-Route::get('/', function () {
-    return view('home');
-});
-
-// Breeze routes (login, register, etc)
 require __DIR__ . '/auth.php';
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::view('/', 'home')->name('home');
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
 
 Route::middleware('auth')->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user');
-    Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/cart/select/{product}', [OrderController::class, 'selectProduct'])->name('cart.select');
     Route::post('/cart/add', [OrderController::class, 'addToCart'])->name('cart.add');

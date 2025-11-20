@@ -27,8 +27,4 @@ class Product extends Model
             'order_id'
         )->withPivot('product_type', 'price_at_order', 'quantity');
     }
-    public static function bestSellers()
-    {
-        return self::whereIn('id', [1, 2, 6])->get(['image_path', 'name']);
-    }
 }

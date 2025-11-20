@@ -30,14 +30,4 @@ class Order extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
-    // public function getFirstPersonOrder()
-    // {
-    //     $orders = Order::where('profile_id', 1)->with('products')->get();
-    //     return view('orders.index', [
-    //         'orders' => $orders
-    //     ]);
-    // }
-
-
 }

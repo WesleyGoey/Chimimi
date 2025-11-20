@@ -72,11 +72,9 @@ class AdminProductController extends Controller
         $data = $request->only(['name', 'category', 'ingredients', 'price_frozen', 'price_cooked']);
 
         if ($request->hasFile('image')) {
-            // Hapus file lama jika ada
             if ($product->image_path && Storage::disk('public')->exists($product->image_path)) {
                 Storage::disk('public')->delete($product->image_path);
             }
-            // Simpan file baru
             $data['image_path'] = $request->file('image')->store('images', 'public');
         }
 

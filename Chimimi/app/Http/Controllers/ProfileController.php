@@ -18,7 +18,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function showPasswordForm(Request $request): View
+    public function showPasswordForm()
     {
         return view('profile.change-password');
     }
