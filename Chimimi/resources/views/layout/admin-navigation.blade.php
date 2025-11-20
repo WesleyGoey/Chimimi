@@ -12,7 +12,8 @@
             </button>
         </div>
         <div class="collapse navbar-collapse" id="adminNavbar">
-            <div class="w-100 d-flex flex-column align-items-lg-center justify-content-lg-center" style="margin-right:100px">
+            <div class="w-100 d-flex flex-column align-items-lg-center justify-content-lg-center"
+                style="margin-right:100px">
                 <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-row justify-content-center" style="gap:2.5rem;">
                     <li class="nav-item">
                         <a class="nav-link text-white fw-bold fs-5 nav-link-hover {{ request()->is('admin/dashboard') ? 'active' : '' }}"

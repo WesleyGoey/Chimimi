@@ -47,7 +47,8 @@
                             </form>
                         </div>
                         <div class="mt-3">
-                            <form method="POST" action="{{ route('profile.destroy') }}" onsubmit="return confirm('Are you sure you want to delete your account?');">
+                            <form method="POST" action="{{ route('profile.destroy') }}"
+                                onsubmit="return confirm('Are you sure you want to delete your account?');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-outline-danger px-4 py-2 w-100"

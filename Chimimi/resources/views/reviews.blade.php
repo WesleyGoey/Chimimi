@@ -66,7 +66,8 @@
                 @if ($reviews->isEmpty())
                     <div class="row justify-content-center align-items-center" style="min-height:20vh;">
                         <div class="col-12 d-flex justify-content-center">
-                            <div style="
+                            <div
+                                style="
                                 background:#fffbe6;
                                 border-radius:18px;
                                 color:#ff6f61;
@@ -96,7 +97,8 @@
                                             <span>
                                                 @for ($i = 1; $i <= 5; $i++)
                                                     @if ($i <= $review->rating)
-                                                        <i class="bi bi-star-fill" style="color:#f17807;font-size:1.15rem;"></i>
+                                                        <i class="bi bi-star-fill"
+                                                            style="color:#f17807;font-size:1.15rem;"></i>
                                                     @else
                                                         <i class="bi bi-star" style="color:#ffe066;font-size:1.15rem;"></i>
                                                     @endif
@@ -104,7 +106,8 @@
                                             </span>
                                         </div>
                                         <div class="text-muted" style="font-size:1rem;">
-                                            <i class="bi bi-clock me-1"></i> Posted: {{ $review->created_at->format('d M Y H:i') }}
+                                            <i class="bi bi-clock me-1"></i> Posted:
+                                            {{ $review->created_at->format('d M Y H:i') }}
                                         </div>
                                     </div>
                                     <hr style="border-top:1.5px solid #ffe066;">
@@ -113,12 +116,12 @@
                                     </div>
                                     @if (auth()->check() && auth()->id() === $review->user_id)
                                         <div class="d-flex justify-content-end gap-2 mt-2">
-                                            <a href="{{ route('reviews.edit', $review->id) }}"
-                                                class="btn btn-sm fw-bold"
+                                            <a href="{{ route('reviews.edit', $review->id) }}" class="btn btn-sm fw-bold"
                                                 style="border-radius:14px;background:#fff;color:#ff6f61;border:2px solid #ff6f61;font-size:1rem;padding:0.5rem 1.2rem;">
                                                 <i class="bi bi-pencil me-1"></i> Edit
                                             </a>
-                                            <form method="POST" action="{{ route('reviews.destroy', $review->id) }}" style="display:inline;">
+                                            <form method="POST" action="{{ route('reviews.destroy', $review->id) }}"
+                                                style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm fw-bold"

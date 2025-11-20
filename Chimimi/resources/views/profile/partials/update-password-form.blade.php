@@ -19,9 +19,11 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="password_confirmation" class="form-label fw-bold" style="color:#f17807;">Confirm Password</label>
-            <input id="password_confirmation" name="password_confirmation" type="password" class="form-control shadow-sm"
-                autocomplete="new-password" style="border-radius:18px;border:2px solid #ffe066;background:#fff;">
+            <label for="password_confirmation" class="form-label fw-bold" style="color:#f17807;">Confirm
+                Password</label>
+            <input id="password_confirmation" name="password_confirmation" type="password"
+                class="form-control shadow-sm" autocomplete="new-password"
+                style="border-radius:18px;border:2px solid #ffe066;background:#fff;">
             @error('password_confirmation', 'updatePassword')
                 <div class="text-danger mt-1">{{ $message }}</div>
             @enderror

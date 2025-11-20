@@ -59,14 +59,18 @@
                                             </div>
                                         </div>
 
-                                       <div class="text-end me-3" style="min-width:120px;">
-                                           @php
-                                               $unit = $product->pivot->product_type == 'Frozen' ? $product->price_frozen : $product->price_cooked;
-                                               $subtotal = $unit * $product->pivot->quantity;
-                                           @endphp
-                                           <div class="small text-muted">Subtotal</div>
-                                           <div class="fw-bold" style="color:#ff6f61;">Rp. {{ number_format($subtotal, 0, ',', '.') }}</div>
-                                       </div>
+                                        <div class="text-end me-3" style="min-width:120px;">
+                                            @php
+                                                $unit =
+                                                    $product->pivot->product_type == 'Frozen'
+                                                        ? $product->price_frozen
+                                                        : $product->price_cooked;
+                                                $subtotal = $unit * $product->pivot->quantity;
+                                            @endphp
+                                            <div class="small text-muted">Subtotal</div>
+                                            <div class="fw-bold" style="color:#ff6f61;">Rp.
+                                                {{ number_format($subtotal, 0, ',', '.') }}</div>
+                                        </div>
 
                                         <div class="ms-auto d-flex align-items-center gap-2">
                                             <a href="{{ route('cart.edit', [$product->id, $product->pivot->product_type]) }}"
@@ -102,18 +106,20 @@
                                     </span>
                                 </div>
                                 <div class="d-flex justify-content-center mt-4">
-                                    <form method="POST" action="{{ route('order.checkout') }}" style="width:100%;max-width:680px;">
+                                    <form method="POST" action="{{ route('order.checkout') }}"
+                                        style="width:100%;max-width:680px;">
                                         @csrf
                                         <div class="mb-3">
-                                            <label class="form-label fw-bold" style="color:#f17807;">Notes (optional)</label>
-                                            <textarea name="notes" class="form-control" rows="3"
-                                                placeholder="Add order notes or special instructions..."
+                                            <label class="form-label fw-bold" style="color:#f17807;">Notes
+                                                (optional)</label>
+                                            <textarea name="notes" class="form-control" rows="3" placeholder="Add order notes or special instructions..."
                                                 style="border-radius:12px;border:2px solid #ffe066;background:#fff;padding:0.8rem;resize:vertical;"></textarea>
                                         </div>
                                         <div class="d-flex justify-content-center mt-2">
                                             <button type="submit" class="btn btn-lg px-5 py-2 fw-bold"
                                                 style="background:#ff6f61;color:#fff;border-radius:32px;box-shadow:0 2px 12px rgba(255,111,97,0.10);font-size:1.15rem;">
-                                                <i class="bi bi-bag-fill" style="font-size:1.3rem; margin-right:0.5rem;"></i>
+                                                <i class="bi bi-bag-fill"
+                                                    style="font-size:1.3rem; margin-right:0.5rem;"></i>
                                                 Order Now
                                             </button>
                                         </div>

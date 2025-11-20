@@ -31,7 +31,7 @@
         </div>
         <div class="text-center mb-3">
             <a href="{{ route('password.change') }}" class="fw-bold"
-               style="color:#f17807;text-decoration:underline;font-size:1rem;">
+                style="color:#f17807;text-decoration:underline;font-size:1rem;">
                 Change Password
             </a>
         </div>
