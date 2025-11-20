@@ -21,7 +21,7 @@ class Product extends Model
     public function orders()
     {
         return $this->belongsToMany(
-            \App\Models\Order::class,
+            Order::class,
             'order_products',
             'product_id',
             'order_id'
