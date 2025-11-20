@@ -2,7 +2,7 @@
     <div class="container-fluid position-relative" style="min-height:70px;max-width:100vw;overflow-x:hidden;">
         <div class="d-flex align-items-center" style="height:70px;">
             <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ url('/') }}"
-                style="margin-left:18px;color:#ffffff;font-size:1.7rem;">
+                style="margin-left:12px;color:#ffffff;font-size:1.7rem;">
                 Admin
             </a>
             <button class="navbar-toggler me-auto border-0" type="button" data-bs-toggle="collapse"
@@ -12,8 +12,8 @@
             </button>
         </div>
         <div class="collapse navbar-collapse" id="adminNavbar">
-            <div class="w-100 d-flex flex-column align-items-lg-center justify-content-lg-center">
-                <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-row justify-content-center" style="gap:2.5rem; margin-left:2.5rem;">
+            <div class="w-100 d-flex flex-column align-items-lg-center justify-content-lg-center" style="margin-right:100px">
+                <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-row justify-content-center" style="gap:2.5rem;">
                     <li class="nav-item">
                         <a class="nav-link text-white fw-bold fs-5 nav-link-hover {{ request()->is('admin/dashboard') ? 'active' : '' }}"
                             href="{{ route('admin.dashboard') }}">Dashboard</a>
@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="d-flex align-items-center justify-content-end"
-            style="height:70px;position:absolute;top:0;right:0;z-index:2;margin-right:40px;">
+            style="height:70px;position:absolute;top:0;right:0;z-index:2;margin-right:20px;">
             <ul class="navbar-nav flex-row" style="gap:2.5rem;">
                 <li class="nav-item">
                     <a class="fs-4" href="/user" title="Profiles" style="color:#ff6f61;">
