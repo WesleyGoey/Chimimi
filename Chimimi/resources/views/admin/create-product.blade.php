@@ -49,8 +49,8 @@
                             <div class="mb-3">
                                 <label for="image" class="form-label fw-bold" style="color:#ff6f61;">Product
                                     Image</label>
-                                <input type="file" name="image" id="image" class="form-control"
-                                    style="border-radius:16px;" placeholder="jpg, jpeg, png">
+                                <input type="file" name="image" id="image" class="form-control" required
+                                    accept="image/*" style="border-radius:16px;" placeholder="jpg, jpeg, png">
                             </div>
                             <div class="d-flex justify-content-center">
                                 <button type="submit" class="btn px-5 py-2"
