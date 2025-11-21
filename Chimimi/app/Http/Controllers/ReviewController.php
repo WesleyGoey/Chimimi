@@ -50,7 +50,7 @@ class ReviewController extends Controller
 
         return redirect()->route('reviews')->with('success', 'Review updated!');
     }
-    public function destroy(\App\Models\Review $review)
+    public function destroy(Review $review)
     {
         $review->delete();
         return redirect()->route('reviews')->with('success', 'Review deleted!');
