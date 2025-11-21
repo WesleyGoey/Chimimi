@@ -42,9 +42,8 @@ class OrderController extends Controller
         ]);
     }
 
-    public function selectProduct($productId)
+    public function selectProduct(Product $product)
     {
-        $product = Product::findOrFail($productId);
         return view('order.cart-select', compact('product'));
     }
 
@@ -98,17 +97,16 @@ class OrderController extends Controller
         return redirect()->route('cart')->with('success', 'Product added to cart!');
     }
 
-    public function editCart($productId, $productType)
+    public function editCart(Product $product, $productType)
     {
-        $product = Product::findOrFail($productId);
         $user = User::find(Auth::id());
         $order = $user->orders()->where('isPaid', false)->where('amount', 0)->latest()->first();
-        $pivot = $order->products()->wherePivot('product_type', $productType)->where('products.id', $productId)->first()->pivot;
+        $pivot = $order->products()->wherePivot('product_type', $productType)->where('products.id', $product->id)->first()->pivot;
         $quantity = $pivot->quantity;
         return view('order.cart-edit', compact('product', 'productType', 'quantity'));
     }
 
-    public function updateCart(Request $request, $productId, $oldProductType)
+    public function updateCart(Request $request, Product $product, $oldProductType)
     {
         $request->validate([
             'product_type' => 'required|in:Frozen,Cooked',
@@ -116,23 +114,27 @@ class OrderController extends Controller
         ]);
 
         $user = User::find(Auth::id());
-        $order = $user->orders()->where('isPaid', false)->where('amount', 0)->latest()->first();
+        $order = $user->orders()
+            ->where('isPaid', false)
+            ->where('amount', 0)
+            ->latest()
+            ->first();
+
         $newType = $request->product_type;
         $quantity = $request->quantity;
-        $product = Product::find($productId);
         $priceAtOrder = ($newType == 'Frozen') ? $product->price_frozen : $product->price_cooked;
 
         if ($newType !== $oldProductType) {
             $existingNewType = DB::table('order_products')
                 ->where('order_id', $order->id)
-                ->where('product_id', $productId)
+                ->where('product_id', $product->id)
                 ->where('product_type', $newType)
                 ->first();
 
             if ($existingNewType) {
                 DB::table('order_products')
                     ->where('order_id', $order->id)
-                    ->where('product_id', $productId)
+                    ->where('product_id', $product->id)
                     ->where('product_type', $newType)
                     ->update([
                         'quantity' => $existingNewType->quantity + $quantity,
@@ -142,13 +144,13 @@ class OrderController extends Controller
 
                 DB::table('order_products')
                     ->where('order_id', $order->id)
-                    ->where('product_id', $productId)
+                    ->where('product_id', $product->id)
                     ->where('product_type', $oldProductType)
                     ->delete();
             } else {
                 DB::table('order_products')
                     ->where('order_id', $order->id)
-                    ->where('product_id', $productId)
+                    ->where('product_id', $product->id)
                     ->where('product_type', $oldProductType)
                     ->update([
                         'product_type' => $newType,
@@ -160,7 +162,7 @@ class OrderController extends Controller
         } else {
             DB::table('order_products')
                 ->where('order_id', $order->id)
-                ->where('product_id', $productId)
+                ->where('product_id', $product->id)
                 ->where('product_type', $newType)
                 ->update([
                     'quantity' => $quantity,
@@ -172,7 +174,7 @@ class OrderController extends Controller
         return redirect()->route('cart')->with('success', 'Cart item updated!');
     }
 
-    public function removeFromCart($productId, $productType)
+    public function removeFromCart(Product $product, $productType)
     {
         $user = User::find(Auth::id());
         $order = $user->orders()
@@ -182,7 +184,7 @@ class OrderController extends Controller
             ->first();
 
         if ($order) {
-            $order->products()->wherePivot('product_type', $productType)->detach($productId);
+            $order->products()->wherePivot('product_type', $productType)->detach($product->id);
 
             if ($order->products()->count() === 0) {
                 $order->delete();
